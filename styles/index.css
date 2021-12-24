@@ -1,0 +1,19 @@
+h1 + p {
+    margin-top: 2rem !important;
+    opacity: 1 !important;
+}
+
+blockquote {
+    margin-top: 2rem !important;
+}
+
+iframe {
+    height: 80% !important;
+    width: 80% !important;
+    margin: 3rem auto 0 auto;
+}
+
+img[alt~="avatar"] {
+    border-radius: 50%;
+    margin-left: 5rem;
+}
