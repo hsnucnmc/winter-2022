@@ -7,6 +7,11 @@ blockquote {
     margin-top: 2rem !important;
 }
 
+pre {
+    margin: 1rem auto 1rem auto;
+    line-height: normal;
+}
+
 iframe {
     height: 80% !important;
     width: 80% !important;
@@ -16,4 +21,8 @@ iframe {
 img[alt~="avatar"] {
     border-radius: 50%;
     margin-left: 5rem;
+}
+
+blockquote {
+    font-size: 1rem !important;
 }
