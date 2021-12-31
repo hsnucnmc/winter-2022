@@ -37,6 +37,7 @@ layout: two-cols
 - Knowledge about basic commands
 - Basic knowledge about HTML / CSS / JS (optional, depends on the difficulty of your project)
 - Basic programming skills
+- Basic knowledge about binary, decimal and hex
 - Basic knowledge about network
 
 <!-- In NCTU CS, a course called SA requires students learn intro to programming and intro to network -->

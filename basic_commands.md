@@ -20,12 +20,14 @@ siriuskoan
 - `mkdir` - create directory
 - `touch` - create file
 - `cp` - copy
-- `cat` - get the content of a file and more things
+- `cat` - get the content of a file and **more things**
 - `mv` - move or rename
 - `pwd` - get current (working) directory
 - `less` - a powerful file viewer
 - `man` - show mannual page
 - `which` - get executable file path
+
+<!-- cat more things -->
 
 ---
 
@@ -253,9 +255,9 @@ If you are interested in how to make a character device or block device, check [
 <!--
 file types
 
-block device: IO with block size, like disk
-character device: a stream of characters, like keyboard
-socket: a way to communicate with other processes
+block device: IO with block size, like disk  
+character device: a stream of characters, like keyboard  
+socket: a way to communicate with other processes  
 named pipe: just like a pipe, but it has name, you can pass some value to it by one process and get it by another process
 -->
 
@@ -313,9 +315,7 @@ Recall the information shown in `ll`.
 - `w`: write
 - `x`: execute
 
-Every three characters shows permissions of a class of user.
-
-Owner, user in the group, others, respectively.
+Every three characters shows permissions of a class of user, which are owner, user in the group, others, respectively.
 
 ---
 
@@ -360,6 +360,8 @@ There are two ways to change permission.
 
   For example, `chmod 1777 test`.
 
+<!-- 4, 2, 1 are 100, 010, 001 in binary -->
+
 ---
 
 # `chmod`
@@ -388,3 +390,45 @@ However, we should use `-R` option to accomplish this.
 `chmod -R 777 d/` will change the permission of all the files and directories under `d/` to `777`.
 
 It is the same when we use `chown` and `chgrp`.
+
+---
+
+# `grep`
+
+> grep - print lines that match patterns
+>
+> Linux mannel page
+
+It is a very useful tool when checking log.
+
+patterns: regular expression
+
+<!-- basic knowledge about regex -->
+
+---
+layout: two-cols
+---
+
+# `grep`
+
+::left::
+
+Some common options
+- `-i` - ignore case different
+- `-r` - recursively
+- `-n` - show line number
+- `-f` - read from file
+- `-e` - regex patterns
+- `-v` - logical NOT
+- `-A` - print some lines after the matched lines
+- `-B` - print some lines before the matched lines
+- `-C` - print some lines before and after the matched lines
+
+::right::
+
+Some common usage
+- `cat test.txt | grep test`
+- `grep "test" test.txt`
+- `grep -inr "test" .`
+- `grep -A 2 -B 2 "test" test.txt`
+- `grep -C 2 "test" test.txt` (the same output as the above one)
