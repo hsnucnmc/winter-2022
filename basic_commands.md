@@ -432,3 +432,31 @@ Some common usage
 - `grep -inr "test" .`
 - `grep -A 2 -B 2 "test" test.txt`
 - `grep -C 2 "test" test.txt` (the same output as the above one)
+
+---
+
+# `ssh`
+
+SSH, standing for Secure Shell, is a protocol that provides secure channel for transferring.
+
+Two ways to connect
+- Use `ssh [username]@[hostname or IP address]` to connect to remote server and start your work.
+
+- Use `ssh-keygen` to generate public key and private key, and use `ssh-copy-id` to copy your key to remote server.
+
+  In this way, no password is required.
+
+<!--
+we will not talk about crypto, just about how to use it, but you should know about key.
+
+In this way, we need password, use key to get rid of it.
+
+steps:
+
+`ssh-keygen`
+
+`ssh-copy-id [hostname]`
+
+(If you leave everything default)
+-->
+
