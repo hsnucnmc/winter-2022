@@ -347,6 +347,38 @@ A real example is `/user/bin/passwd`: `-rwsr-xr-x`.
 
 # `chmod`
 
+- uid - who runs the script
+- gid - the group the runner belongs to
+- euid - who actually runs the script and acquires the resources
+- egid - the group which actually runs the script and acquires the resources
+
+In normal situation, `uid == euid`, `gid == egid`.
+
+However, if we use `setuid` and `setgid`, `euid` becomes the owner's id and `egid` becomes the group's id.
+
+---
+
+# `chmod`
+
+We can use this simple program to check the uid, gid, euid and egid.
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+int main() {
+    uid_t real_uid = getuid();
+    uid_t effect_uid = geteuid();
+    gid_t real_gid = getgid();
+    gid_t effect_gid = getegid();
+    printf("ruid=%d, euid=%d\n", real_uid, effect_uid);
+    printf("rgid=%d, egid=%d\n", real_gid, effect_gid);
+}
+```
+
+---
+
+# `chmod`
+
 Sometimes, there is `t` in permissions. It means sticky bit.
 
 Sticky bit means only the owner of a file (and superuser) can remove or move it.
@@ -553,3 +585,7 @@ Some common errors
 - `Sorry, user [username] is not allowed to execute [command] as [user] on [hostname]`
 
 ![not in](/sudo_meme_2.jpg)
+
+---
+
+# `scp` / `rsync`
