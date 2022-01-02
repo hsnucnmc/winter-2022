@@ -1,3 +1,8 @@
+.slidev-page-1 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.333), rgba(0, 0, 0, 0.533)), url(https://images.unsplash.com/photo-1491002052546-bf38f186af56?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1208&q=80) !important;
+    backdrop-filter: brightness(60%) !important;
+}
+
 h1 + p {
     margin-top: 2rem !important;
     opacity: 1 !important;
@@ -5,6 +10,8 @@ h1 + p {
 
 blockquote {
     margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+    font-size: 1rem !important;
 }
 
 pre {
@@ -23,6 +30,3 @@ img[alt~="avatar"] {
     margin-left: 5rem;
 }
 
-blockquote {
-    font-size: 1rem !important;
-}

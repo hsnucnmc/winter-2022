@@ -52,12 +52,11 @@ layout: two-cols
 
 **System Administration**
 
-- Basic Commands & Shell Script
+- Basic Commands
 - Logging
 - Cron
-- Firewall
 - Certificate & PKI
-- Web Server: nginx
+- Web Server: Nginx
 - Database: MySQL
 - Overview for Mail, DNS, LDAP and NFS Server
 

@@ -41,7 +41,13 @@ siriuskoan
 - `scp` / `rsync`
 - `ps` / `top` / `htop`
 
-But before we start, let's learn some tools.
+---
+layout: cover
+background: none
+---
+
+# Before we start,
+# Let's learn some tools.
 
 ---
 
@@ -460,3 +466,90 @@ steps:
 (If you leave everything default)
 -->
 
+---
+
+# `su` / `sudo`
+
+Both of them make you have higher priviledges, but there are still some differences between them.
+- `su` gives you full permissions of root. When using it, you should use **root password**.
+- `sudo` gives you temporary higher permissions for executing certain commands. When using it, you should use **your own password**.
+
+![sudo](/sudo_meme.jpg)
+
+---
+
+# `su` / `sudo`
+
+Using `sudo` is much better than using `su` when a team maintains a system.
+- It can give different team members different permissions, i.e., your system can have better access control.
+- Every command executed with `sudo` will be recorded in `/var/log/secure`, so if there is something wrong, it is easy to find out who did it.
+
+We should not do anything like `bash` with `sudo` since others cannot know what you do.
+
+That is, we should not do anything that (can) creates a shell with `sudo`. For example, `su`, `sh`, `vim`, `less` and so on.
+
+<!--
+To edit, you can use rvim or edit
+
+To read, you can use `sudo cat log_file | less` since sudo can apply to cat command.
+-->
+
+---
+
+# `su` / `sudo`
+
+To run command as root with `su`
+- `su` - switch to root
+- `su -` - login as root
+
+To switch to another user, we can use `su - [user]`.
+
+<!--
+If you only use `su`, some env variables may be not the same as root, causing "command not found" error.
+
+One difference is that using `su` you will stay at your current path, but using `su -` you will move to home directory of root.
+-->
+
+---
+
+# `su` / `sudo`
+
+To run command as others with `sudo`
+- `sudo [command]` - using `sudo` to run a command as root
+- `sudo !!` - using `sudo` to run last command as root
+- `sudo -u [user] [command]` - using `sudo` to run command as specified user
+- `sudo -g [group] [command]` - using `sudo` to run command as specified group
+
+![sudo !!](https://ubuntuqa.com/wp-content/uploads/2018/03/3d4606b212339009f65dc2a41fa665d6.jpg)
+
+---
+
+# `su` / `sudo`
+
+We can use `visudo` to edit sudo config file (`/etc/sudoers`).
+
+```
+User Host=(RunAsUser:Group) Commands
+```
+
+For example,
+- `root ALL = (ALL:ALL) ALL`
+- `%sudo ALL = (ALL:ALL) ALL`
+- `siriuskoan ALL = (root) /bin/cat,/bin/ls`
+- `siriuskoan ALL = (root) NOPASSWD:ALL`
+
+https://medium.com/kernel-space/linux-fundamentals-a-to-z-of-a-sudoers-file-a5da99a30e7f
+
+https://linux.die.net/man/5/sudoers
+
+<!-- There is alias in sudoers, but we don't talk about that -->
+
+---
+
+# `su` / `sudo`
+
+Some common errors
+- `[username] is not in the Sudoers file. This incident will be reported.`
+- `Sorry, user [username] is not allowed to execute [command] as [user] on [hostname]`
+
+![not in](/sudo_meme_2.jpg)
