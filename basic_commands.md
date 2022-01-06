@@ -1,6 +1,5 @@
 ---
 theme: seriph
-download: true
 background: https://images.unsplash.com/photo-1491002052546-bf38f186af56?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1208&q=80
 fonts:
     sans: 'Roboto'
@@ -237,10 +236,27 @@ First thing to know: everything you see in Linux is file, i.e.,
 
 # `ls`
 Two types of path:
-- absolute path (start with /): /var/log/auth.log
-- relative path (start from current directory): test/meow.txt
+- absolute path (start with `/`): `/var/log/auth.log`
+- relative path (start from current directory): `test/meow.txt`
+
+Some special path
+- `.` - current directory
+- `..` - parent directory
+- `~` - home directory
+- `/` - root directory
 
 <!-- path types -->
+
+---
+
+# `ls`
+`ls -l` (or `ll`)
+
+```
+-rw-rw----    1 siriuskoan wheel     217 Apr 8 14:08 test
+```
+
+<!-- permission hard_link owner group size filename -->
 
 ---
 
@@ -266,17 +282,6 @@ character device: a stream of characters, like keyboard
 socket: a way to communicate with other processes  
 named pipe: just like a pipe, but it has name, you can pass some value to it by one process and get it by another process
 -->
-
----
-
-# `ls`
-`ls -l` (or `ll`)
-
-```
--rw-rw----    1 siriuskoan wheel     217 Apr 8 14:08 test
-```
-
-<!-- permission hard_link owner group size filename -->
 
 ---
 
@@ -435,7 +440,7 @@ It is the same when we use `chown` and `chgrp`.
 
 > grep - print lines that match patterns
 >
-> Linux mannel page
+> Linux manual page
 
 It is a very useful tool when checking log.
 
@@ -552,7 +557,7 @@ To run command as others with `sudo`
 - `sudo -u [user] [command]` - using `sudo` to run command as specified user
 - `sudo -g [group] [command]` - using `sudo` to run command as specified group
 
-![sudo !!](https://ubuntuqa.com/wp-content/uploads/2018/03/3d4606b212339009f65dc2a41fa665d6.jpg)
+![sudo !!](/sudo_last.jpg)
 
 ---
 
@@ -589,3 +594,70 @@ Some common errors
 ---
 
 # `scp` / `rsync`
+
+> `scp` - secure copy (remote file copy program)
+>
+> Linux manual page
+
+`scp` uses SSH protocol to copy file from one host to another.
+
+`scp` is a good firend when we need to copy file from one host to another host. However, `scp` has been deprecated, we should use `rsync` instead.
+
+---
+
+# `scp` / `rsync`
+
+Usage
+- `scp [path] [user]@[remote host]:[path]` - copy file to remote host
+- `scp [user]@[remote host]:[path] [path]` - copy file from remote host
+
+Examples
+- `scp ~/test.txt siriuskoan@my-host:~`
+- `scp phkoan@linux1.cs.nctu.edu.tw:~/test.txt ~`
+
+Options
+- `-r` - recursively
+- `-p` - preserves modification times, access times, and modes from the original file.
+- `-C` - enable compression
+
+https://blog.gtwang.org/linux/linux-scp-command-tutorial-examples/
+
+
+<!-- Remember to add `:[path]`, or it will copy `test.txt` to `siriuskoan@my-host`, which is a filename -->
+
+---
+
+# `scp` / `rsync`
+
+> `rsync` - a fast, versatile, remote (and local) file-copying tool
+>
+> Linux manual page
+
+`rsync` can do what `cp` and `scp` do, moreover, it is more efficient.
+
+Advantages
+- Speed
+- Better security
+- Delta transfer algorithm
+
+---
+
+# `scp` / `rsync`
+
+Examples
+- `rsync ~/test.txt  siriuskoan@my-host:~`
+- `rsync phkoan@linux1.cs.nctu.edu.tw:~/test.txt ~`
+
+Options
+- `r` - recursively
+- `a` - archive
+- `z` - enable compression
+- `--delete` - delete receiving side file if it does not exist in the sending files
+- `--progress` - show progress
+
+https://blog.gtwang.org/linux/rsync-local-remote-file-synchronization-commands/
+
+<!--
+Usage just like `scp`
+-->
+
