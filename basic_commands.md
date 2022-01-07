@@ -39,6 +39,7 @@ siriuskoan
 - `su` / `sudo`
 - `scp` / `rsync`
 - `ps` / `top` / `htop`
+- `du` / `df`
 
 ---
 layout: cover
@@ -740,5 +741,43 @@ Let's see how to use them.
 <!--
 
 Just open terminal and show `top` and `htop`
+
+-->
+
+---
+
+# `du` / `df`
+
+> du - estimate file space usage
+>
+> Linux manual page
+
+> df - report file system disk space usage
+>
+> Linux manual page
+
+---
+
+# `du` / `df`
+
+They are some tools that help us check disk usage or file / directory size.
+
+Usage
+- `du -ah ~` - show the size of all files under home directory
+- `du -ah -d 1 /` - show the size of all directories under root directory (because of `-d 1`)
+- `du -hs ~` - show how large the home directory is
+- `df -Th` - show all filesystems disk usage along with their filesystem types
+
+<!--
+
+`-a` means all files, not only directories
+
+`-d` means depth
+
+`-h` means human-readable
+
+`-s` means the same as `-d 0`
+
+`-T` means filesystem type
 
 -->
