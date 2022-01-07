@@ -649,9 +649,9 @@ Examples
 - `rsync phkoan@linux1.cs.nctu.edu.tw:~/test.txt ~`
 
 Options
-- `r` - recursively
-- `a` - archive
-- `z` - enable compression
+- `-r` - recursively
+- `-a` - archive
+- `-z` - enable compression
 - `--delete` - delete receiving side file if it does not exist in the sending files
 - `--progress` - show progress
 
@@ -661,3 +661,84 @@ https://blog.gtwang.org/linux/rsync-local-remote-file-synchronization-commands/
 Usage just like `scp`
 -->
 
+---
+
+# `ps` / `top` / `htop`
+
+They are process and system monitoring tools.
+
+> ps - report a snapshot of the current processes
+>
+> Linux manual page
+
+> top - display Linux processes
+>
+> Linux manual page
+
+> htop - interactive process viewer
+>
+> Linux manual page
+
+---
+
+# `ps` / `top` / `htop`
+
+`ps aux` is a command we often use.
+
+![ps](/ps.png)
+
+<!--
+
+USER: user
+
+PID: process ID, every process has identical one. PIDs are serial numbers.
+
+VSZ: Virtual Memory Size
+
+RSS: Resident Set Size
+
+https://linuxconfig.org/ps-output-difference-between-vsz-vs-rss-memory-usage
+
+TTY: terminal device, like your screen. When you ssh, the terminal is pty
+
+STAT: state, `I` means idle, `S` means sleeping, the second letter is additional flag
+
+-->
+
+---
+
+# `ps` / `top` / `htop`
+
+Program is dead, when you execute it, it becomes a process.
+
+Attributes of the processes
+- PID, PPID - Process ID and Parent PID
+- UID, EUID - User ID and Effective UID
+- GID, EGID - Group ID and Effective GID
+- Niceness - Priority
+
+<!--
+
+We have talked about UID, EUID, GID and EGID before.
+
+PPID is the Parent PID, which manifests which process create this process, we can check this out with htop
+
+Niceness is means the priority, the higher the niceness is, the lower priority the process has. We can use `nice` or `renice` to update the value
+
+-->
+
+---
+
+# `ps` / `top` / `htop`
+
+`top` and `htop` are both process viewers, we can use them to check out some system and processes information.
+
+`htop` is a better process viewer than `top`.
+
+Let's see how to use them.
+
+<!--
+
+Just open terminal and show `top` and `htop`
+
+-->
