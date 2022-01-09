@@ -327,6 +327,8 @@ Recall the information shown in `ll`.
 - `w`: write
 - `x`: execute
 
+For directory, `rwx` represent "can `ls` in it", "can write a file in it" and "can `cd` into it".
+
 Every three characters shows permissions of a class of user, which are owner, user in the group, others, respectively.
 
 ---
