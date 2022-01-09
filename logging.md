@@ -29,8 +29,8 @@ siriuskoan
 
 # Why Do We Need Log Files?
 
-- We can know what went wrong when an incident happened
-- We can know who did what before an incident happened
+- We can know what went wrong when an incident happens
+- We can know who did what before an incident happens
 
 For example,
 - Mail log
@@ -88,3 +88,22 @@ error_log /var/log/nginx/error.log;
 
 ---
 
+# Log Ratate
+
+As the time elapsed, the log files got larger and larger.
+
+It has some disadvantages
+- It's hard to open the files
+- It's hard to find out what happened at when
+
+Therefore, we have to adopt log rotate to make the log files separated.
+
+In `/var/log`, there are many examples such as `auth.log.1`.
+
+<!--
+
+The log files will be rotated every day or any other time interval.
+
+Or they can be rotated by size.
+
+-->
