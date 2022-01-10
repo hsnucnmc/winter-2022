@@ -166,7 +166,7 @@ https://nasa.cs.nctu.edu.tw/sa/2021/slides/17_Syslog_and_LogRotate.pdf (P12)
 
 <!--
 
-The facility represents the machine process or service that created the syslog event.
+The facility represents the machine process that created the syslog event.
 
 -->
 
@@ -214,4 +214,20 @@ For example, we can use
 - `*`
 
 ---
+
+# Syslog - `logger` Command
+
+We can use `logger` command in our shell scripts to log messages with syslog.
+
+Basic Usage: `logger {message}`
+
+Options
+- `-f` - Load messages from file.
+- `-p` - Priority (selector)
+- `-t` - Tag (service name)
+
+For example, when using `logger -t tag -p local0.notice "test message"`, the log will be
+```
+Jan 11 15:45:34 <local0.notice> bsd1 tag[7621]: test message
+```
 
