@@ -180,11 +180,19 @@ The config file manifests how log messages should be recorded.
 
 The basic format is `{facility}.{level}  {action}`, `{facility}.{level}` part is also called "selector".
 
+We can also use property-based filter. https://www.rsyslog.com/doc/v8-stable/configuration/filters.html
+
+<!--
+
+While the selector provides a way to classify log messages by its source and level, property-based filter provides a way to classify them by its content.
+
+-->
+
 ---
 
 # Syslog - Config
 
-We can also combine many selectors.
+We can also combine many selectors by `,` and `;`.
 
 ```systemd
 {facility1},{facility2}.{level} {action}
@@ -192,6 +200,8 @@ We can also combine many selectors.
 ```
 
 We can also use `*` to represents all facilities or levels.
+
+You may prefix each entry with the minus `-` sign to omit syncing the file after every logging. However, syncing will not be enabled by default.
 
 In addition to a sin`le `.`, we can use other operator
 - `.=`
@@ -208,7 +218,7 @@ The action can be file, host, user.
 
 For example, we can use
 - `/var/log/my_service.log`
-- `@my_loghost`
+- `@my_loghost` (Of course the remote host should be able to receive them)
 - `@140.131.149.22`
 - `root`
 - `*`
@@ -217,7 +227,9 @@ For example, we can use
 
 # Syslog - `logger` Command
 
-We can use `logger` command in our shell scripts to log messages with syslog.
+> `logger` - enter messages into the system logger
+>
+> Linux manual page
 
 Basic Usage: `logger {message}`
 
@@ -227,7 +239,12 @@ Options
 - `-t` - Tag (service name)
 
 For example, when using `logger -t tag -p local0.notice "test message"`, the log will be
-```
+```systemd
 Jan 11 15:45:34 <local0.notice> bsd1 tag[7621]: test message
 ```
 
+<!--
+
+`7621` is PID
+
+-->
