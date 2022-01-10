@@ -107,3 +107,63 @@ The log files will be rotated every day or any other time interval.
 Or they can be rotated by size.
 
 -->
+
+---
+
+# Syslog
+
+Syslog is a daemon that log messages with certain level to specified log files.
+
+Config file: `/etc/syslog.conf`, `/etc/syslog.d/*`
+
+Command: `logger`
+
+<!--
+
+We or our shell script can use `logger` command to log messages.
+
+So we don't have to manually write log messages into log files.
+
+-->
+
+---
+
+# Syslog - Log Level
+
+- `EMERGENCY` - A "panic" condition
+- `ALERT` - Should be corrected immediately
+- `CRITICAL` - Should be corrected immediately, but indicates failure in a primary system
+- `ERROR` - Non-urgent failures
+- `WARNING` - Warning messages - not an error, but indication that an error will occur if action is not taken
+- `NOTICE` - Events that are unusual but not error conditions - no immediate action required
+- `INFO` - Normal operational messages
+- `DEBUG` - Info useful to developers for debugging the app
+
+https://success.trendmicro.com/solution/TP000086250-What-are-Syslog-Facilities-and-Levels
+
+<!--
+
+The log level manifests how serious the condition is
+
+-->
+
+---
+
+# Syslog - Facilities
+
+- `kern` - The kernel
+- `user` - User processes (default)
+- `mail` - `sendmail` and other mail-related software
+- `daemon` - System daemons
+- `auth` - Security and authorization-related commands
+- `cron` - The cron daemon
+- `syslog` - `syslogd` internal messages
+- ...
+
+https://nasa.cs.nctu.edu.tw/sa/2021/slides/17_Syslog_and_LogRotate.pdf (P12)
+
+<!--
+
+The facility represents the machine process that created the syslog event.
+
+-->
