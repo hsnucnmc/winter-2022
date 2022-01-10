@@ -23,7 +23,7 @@ siriuskoan
   - Log Level
   - Log Facility
   - Config
-  - `logger` command
+  - `logger` Command
 
 ---
 
@@ -118,6 +118,8 @@ Config file: `/etc/syslog.conf`, `/etc/syslog.d/*`
 
 Command: `logger`
 
+C library: `syslog.h`
+
 <!--
 
 We or our shell script can use `logger` command to log messages.
@@ -164,6 +166,52 @@ https://nasa.cs.nctu.edu.tw/sa/2021/slides/17_Syslog_and_LogRotate.pdf (P12)
 
 <!--
 
-The facility represents the machine process that created the syslog event.
+The facility represents the machine process or service that created the syslog event.
 
 -->
+
+---
+
+# Syslog - Config
+
+Config file: `/etc/syslog.conf`, `/etc/syslog.d/*`
+
+The config file manifests how log messages should be recorded.
+
+The basic format is `{facility}.{level}  {action}`, `{facility}.{level}` part is also called "selector".
+
+---
+
+# Syslog - Config
+
+We can also combine many selectors.
+
+```systemd
+{facility1},{facility2}.{level} {action}
+{facility1}.{level};{facility2}.{level} {action}
+```
+
+We can also use `*` to represents all facilities or levels.
+
+In addition to a sin`le `.`, we can use other operator
+- `.=`
+- `.<=`
+- `.>=` (the same as `.`)
+- `.<`
+- `.>`
+
+---
+
+# Syslog - Config
+
+The action can be file, host, user.
+
+For example, we can use
+- `/var/log/my_service.log`
+- `@my_loghost`
+- `@140.131.149.22`
+- `root`
+- `*`
+
+---
+
