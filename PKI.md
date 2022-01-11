@@ -188,3 +188,44 @@ However, if we need to generate a lot of certificates, you only need to install 
 
 https://blog.cssuen.tw/create-a-self-signed-certificate-using-openssl-240c7b0579d3
 
+---
+
+# OpenSSL - Test Server With OpenSSL
+
+OpenSSL library also provides a command to connect to server with SSL/TLS.
+
+We will take a mail server as example.
+
+Mail server use SMTP, and we can make it secure by using SMTPS, which uses port 465.
+
+For the former protocol, we can use `telnet` command to connect to the server, and for the latter protocol, we can use `openssl` command.
+
+<!--
+
+More details about mail server will be discussed later.
+
+-->
+
+---
+
+# OpenSSL - Test Server With OpenSSL
+
+**Scenario:**
+
+We have a mail server on host `sirius.cnmc.tw` with SMTPS using port 587.
+
+However, it does not work correctly, so we want to connect to it and check what's happened.
+
+We can use `openssl s_client -connect sirius.cnmc.tw:465` to connect to the server.
+
+If the mail server SMTPS is working, you can see the message like `220 sirius.cnmc.tw ESMTP Postfix`, and then it will wait you to enter some commands such as `AUTH LOGIN`, which means that we can start debugging.
+
+Besides the `220` message, you will see some SSL/TLS information such as server certificate, TLS version and so on.
+
+<!--
+
+`220` is status code
+
+`AUTH LOGIN` asks server to authenticate your identity, you can enter username and password which are encoded in base64 now
+
+-->
