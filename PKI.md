@@ -17,6 +17,9 @@ siriuskoan
 # Outline
 - What Is PKI
 - OpenSSL
+  - Create a Self-signed Certificate - Method 1
+  - Create a Self-signed Certificate - Method 2
+  - Test Server With OpenSSL
 
 ---
 
@@ -25,6 +28,8 @@ siriuskoan
 PKI, standing for Public Key Infrastructure, consists of hardware, software, people, policies and so on.
 
 It is used to create, manage, distribute, use, store, revoke digital certificates.
+
+https://people.cs.nctu.edu.tw/~rjchen/Crypto2008/PKI.pdf
 
 ---
 layout: two-cols
@@ -77,6 +82,16 @@ From https://www.ssl.com/faqs/what-is-a-certificate-authority/
 
 # OpenSSL
 
+> The OpenSSL Project develops and maintains the OpenSSL software - a robust, commercial-grade, full-featured toolkit for general-purpose cryptography and secure communication.
+>
+> OpenSSL official page
+
+The toolkit is versatile, we will use it to generate certificates and do server testing.
+
+---
+
+# OpenSSL - Create a Self-signed Certificate
+
 There are many ways to get a certificate.
 - Buy one
   - Expensive
@@ -98,7 +113,7 @@ When talking about that, we will see how CA signs certificate.
 
 ---
 
-# OpenSSL
+# OpenSSL - Create a Self-signed Certificate
 
 You can use `openssl` command to generate key and certificate.
 
@@ -120,7 +135,7 @@ After doing that, you will get a certificate file `cert.pem` and a key file `key
 
 ---
 
-# OpenSSL
+# OpenSSL - Create a Self-signed Certificate
 
 In addition to only generating key and certificate, you can create your own CA and use it to sign more certificates.
 
@@ -143,7 +158,7 @@ Method 2
 
 ---
 
-# OpenSSL
+# OpenSSL - Create a Self-signed Certificate
 
 4. `openssl req -new -key host.key -sha256 -out host.csr`
 
@@ -165,7 +180,7 @@ Method 2
 
 ---
 
-# OpenSSL
+# OpenSSL - Create a Self-signed Certificate
 
 The first method is easy and convenient, while the second method is rather complicated.
 
