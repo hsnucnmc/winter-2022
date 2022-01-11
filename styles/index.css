@@ -38,3 +38,6 @@ img[alt~="avatar"] {
     margin-left: 5rem;
 }
 
+.two-columns .col-right {
+    margin-left: 3rem !important;
+}

@@ -112,11 +112,59 @@ https://nasa.cs.nctu.edu.tw/sa/2021/slides/09_Periodic_Processes.pdf (P8)
 
 # Cron - `crontab` command
 
+> crontab - maintain crontab files for individual users (Vixie Cron)
+>
+> Linux manual page
+
 Users can create their own crontab by using `crontab` command.
 
 Usage
 - `crontab -l` - Show crontab
 - `crontab -e` - Edit crontab
+- `crontab [filename]` - Install the file as crontab
 
 The custom crontab syntax is the same as system crontab, but user cannot specifies executor.
 
+---
+
+# `at` Command
+
+> `at`, `batch`, `atq`, `atrm` - queue, examine, or delete jobs for later execution
+>
+> Linux manual page
+
+`at` command allows users to add schedule jobs which will only be executed once.
+
+To use `at` command, `atd` daemon must be enabled and started.
+
+Config file: `/etc/at.allow`, `/etc/at.deny`
+
+Commands
+- `at` - Create jobs
+- `batch` - Create jobs which will run only when CPU loading is not too much
+- `atq` - Show jobs with ID
+- `atrm` - Remove job by ID
+
+<!--
+
+Allow and deny file are the same as crontab
+
+-->
+
+---
+
+# `at` Command
+
+Usage
+- `at [TIME]` - Create job which will run at specified time
+- `at -c [ID]` - Show job command
+- `at -l` - The same as `atq`
+- `at -d [ID]` - The same as `atrm`
+
+`TIME` can be
+- `HH:MM`
+- `HH:MM YYYY:MM:DD`
+- `HH:MM[am|pm] [month] [day]`
+- `[TIME] + [n] [time unit]` (`now + 2 minutes`)
+
+http://linux.vbird.org/linux_basic/0430cron.php
