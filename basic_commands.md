@@ -40,6 +40,7 @@ siriuskoan
 - `scp` / `rsync`
 - `ps` / `top` / `htop`
 - `du` / `df`
+- Introduction to Shell Script
 
 ---
 layout: cover
@@ -781,5 +782,98 @@ Usage
 `-s` means the same as `-d 0`
 
 `-T` means filesystem type
+
+-->
+
+---
+
+# Introduction to Shell Script
+
+Shell is a bridge between user and system kernel.
+
+There are many shells such as Bourne shell (sh), bash, zsh and so on.
+
+![](/shell.png)
+
+---
+
+# Introduction to Shell Script
+
+By writting shell script, several things like analyzing log and user management can be done automatically.
+
+We can program in shell language, which has variables, flow control, input, output and so on, just like all the other languages, but it has its own syntax.
+
+Shell language is a interpreted language, it can be run directly in your shell.
+
+Actually, shell script consists of the commands we use, but with some important components such as special variables, exit code and so on.
+
+After finishing your script, remember to `chmod` it to allow users to execute it.
+
+<!--
+
+The commands just like functions `print`, `int` in Python.
+
+There are many things to be understood in shell script, but we cannot talk about them due to limit of time, even the syntax is skipped.
+
+-->
+
+---
+
+# Introduction to Shell Script
+
+Shell script file starts with "Shebang" (`#!`), the sign specifies which program is used to run it.
+
+For example, if we want `bash` to run the script, the Shebang is `#!/bin/bash`.
+
+Also, we can use `python` to run it, and the Shebang is `#!/usr/bin/python`.
+
+Then, you can run it by executing command `./your_script_name.sh` (be sure you have make it executable).
+
+---
+
+# Introduction to Shell Script
+
+Let's see an example of shell script.
+
+```bash
+#!/bin/bash
+
+my_name="$1";
+
+if [[ ${my_name} == "siriuskoan" ]]; then
+    echo "You are admin!";
+else
+    echo "You are not admin, the incident will be reported.";
+    echo "${my_name} attempted to run this script" > /root/my_script.log;
+fi
+```
+
+<!--
+
+`$1` is the first argument from command line.
+
+When assigning variables, `$` is not needed, but when accessing variables, it is needed.
+
+`fi` is the end of `if`.
+
+-->
+
+---
+
+# Introduction to Shell Script
+
+If you want to know more about the syntax of shell script, you can check out the following two websites.
+
+https://nasa.cs.nctu.edu.tw/sa/2021/slides/04_ShellProgramming.pdf
+
+https://devhints.io/bash
+
+<!--
+
+The first one is the slides from the NCTU class called SA.
+
+The second one is cheatsheet.
+
+If much time is left, open the slides.
 
 -->
