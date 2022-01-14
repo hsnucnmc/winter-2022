@@ -20,10 +20,6 @@ layout: two-cols
 
 ::left::
 
-- HTTP Protocol
-  - Status Code
-  - Methods
-  - Request and Response
 - Background knowledge
   - HTML / CSS / JS
   - URL
@@ -31,6 +27,11 @@ layout: two-cols
   - Proxy
   - Virtual Host
   - SNI
+- HTTP
+  - Client-Server Architecture
+  - Status Code
+  - Methods
+  - Request and Response
 
 ::right::
 
@@ -39,3 +40,33 @@ layout: two-cols
   - Config
   - Reverse Proxy
   - Load Balancing
+
+---
+
+# HTTP
+
+HTTP, standing for HyperText Transfer Protocol, is a protocol for fetching resources such as HTML documents.
+
+It is the foundation of any data exchange on the Web.
+
+It is one of the protocols in application layer, and it is sent over TCP.
+
+---
+
+# HTTP
+
+![](/http-layers.png)
+
+---
+
+# HTTP - Client-Server Architecture
+
+![](/http-client-server.png)
+
+https://nasa.cs.nctu.edu.tw/sa/2021/slides/18_Web.pdf (P9)
+
+<!--
+
+The first step is client sends request to server.png
+
+-->
