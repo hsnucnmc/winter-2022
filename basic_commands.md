@@ -108,7 +108,7 @@ When in normal mode, type
 
 ::end::
 
-https://vim.rtorr.com/
+[Vim Cheat Sheet](https://vim.rtorr.com/)
 
 ---
 
@@ -163,7 +163,7 @@ Prefix: `Ctrl + b`
 - `%` - split current window vertically
 - `{arrow key}` - switch among panes
 
-https://blog.gtwang.org/linux/linux-tmux-terminal-multiplexer-tutorial/
+[Linux tmux 終端機管理工具使用教學](https://blog.gtwang.org/linux/linux-tmux-terminal-multiplexer-tutorial/)
 
 ---
 
@@ -173,7 +173,7 @@ https://blog.gtwang.org/linux/linux-tmux-terminal-multiplexer-tutorial/
 - `<`, `<<`
 - `|`
 
-https://blog.gtwang.org/linux/linux-io-input-output-redirection-operators/
+[Linux I/O 輸入與輸出重新導向](https://blog.gtwang.org/linux/linux-io-input-output-redirection-operators/)
 
 <!--
 Final step before entering commands
@@ -579,9 +579,9 @@ For example,
 - `siriuskoan ALL = (root) /bin/cat,/bin/ls`
 - `siriuskoan ALL = (root) NOPASSWD:ALL`
 
-https://medium.com/kernel-space/linux-fundamentals-a-to-z-of-a-sudoers-file-a5da99a30e7f
+[Linux Fundamentals: A to Z of a Sudoers File.](https://medium.com/kernel-space/linux-fundamentals-a-to-z-of-a-sudoers-file-a5da99a30e7f)
 
-https://linux.die.net/man/5/sudoers
+[sudoers(5) - Linux man page](https://linux.die.net/man/5/sudoers)
 
 <!-- There is alias in sudoers, but we don't talk about that -->
 
@@ -624,7 +624,7 @@ Options
 - `-p` - preserves modification times, access times, and modes from the original file.
 - `-C` - enable compression
 
-https://blog.gtwang.org/linux/linux-scp-command-tutorial-examples/
+[scp 指令用法教學與範例](https://blog.gtwang.org/linux/linux-scp-command-tutorial-examples/)
 
 
 <!-- Remember to add `:[path]`, or it will copy `test.txt` to `siriuskoan@my-host`, which is a filename -->
@@ -659,7 +659,7 @@ Options
 - `--delete` - delete receiving side file if it does not exist in the sending files
 - `--progress` - show progress
 
-https://blog.gtwang.org/linux/rsync-local-remote-file-synchronization-commands/
+[使用 rsync 遠端檔案同步與備份工具教學與範例](https://blog.gtwang.org/linux/rsync-local-remote-file-synchronization-commands/)
 
 <!--
 Usage just like `scp`
@@ -795,6 +795,12 @@ There are many shells such as Bourne shell (sh), bash, zsh and so on.
 
 ![](/shell.png)
 
+<!--
+
+https://medium.com/@truong21/what-happens-where-you-type-ls-l-in-a-linux-shell-a-command-line-journey-7f4dbf051336
+
+-->
+
 ---
 
 # Introduction to Shell Script
@@ -864,9 +870,9 @@ When assigning variables, `$` is not needed, but when accessing variables, it is
 
 If you want to know more about the syntax of shell script, you can check out the following two websites.
 
-https://nasa.cs.nctu.edu.tw/sa/2021/slides/04_ShellProgramming.pdf
+[NCTU SA - Shell Programming](https://nasa.cs.nctu.edu.tw/sa/2021/slides/04_ShellProgramming.pdf)
 
-https://devhints.io/bash
+[Bash scripting cheatsheet](https://devhints.io/bash)
 
 <!--
 

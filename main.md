@@ -55,7 +55,7 @@ layout: two-cols
 - Basic Commands
 - Logging
 - Cron
-- Certificate & PKI
+- PKI
 - Web Server: Nginx
 - Database: MySQL
 - Overview for Mail, DNS, LDAP and NFS Server

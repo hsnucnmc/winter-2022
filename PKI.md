@@ -29,7 +29,7 @@ PKI, standing for Public Key Infrastructure, consists of hardware, software, peo
 
 It is used to create, manage, distribute, use, store, revoke digital certificates.
 
-https://people.cs.nctu.edu.tw/~rjchen/Crypto2008/PKI.pdf
+[PKI](https://people.cs.nctu.edu.tw/~rjchen/Crypto2008/PKI.pdf)
 
 ---
 layout: two-cols
@@ -50,11 +50,11 @@ layout: two-cols
 
 ![](/pki-hierarchy.png)
 
-From https://www.sysadmins.lv/blog-en/certificate-chaining-engine-how-this-works.aspx
-
 <!--
 
 Explanation
+
+From https://www.sysadmins.lv/blog-en/certificate-chaining-engine-how-this-works.aspx
 
 -->
 
@@ -66,9 +66,9 @@ How to get a certificate from CA.
 
 ![](/ca-diagram.png)
 
-From https://www.ssl.com/faqs/what-is-a-certificate-authority/
-
 <!--
+
+From https://www.ssl.com/faqs/what-is-a-certificate-authority/
 
 1. User use his own information and public key to generate CSR, and send it to CA
 
@@ -186,7 +186,7 @@ The first method is easy and convenient, while the second method is rather compl
 
 However, if we need to generate a lot of certificates, you only need to install the CA to trust all the certificates by using the second method.
 
-https://blog.cssuen.tw/create-a-self-signed-certificate-using-openssl-240c7b0579d3
+[Create a self-signed certificate using OpenSSL](https://blog.cssuen.tw/create-a-self-signed-certificate-using-openssl-240c7b0579d3)
 
 ---
 

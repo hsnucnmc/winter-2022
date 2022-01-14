@@ -106,7 +106,7 @@ In addition to time, you can trigger cron job by event.
 - `@every_minute` (the same as `*/1 * * * *`)
 - `@every_second`
 
-https://nasa.cs.nctu.edu.tw/sa/2021/slides/09_Periodic_Processes.pdf (P8)
+[NCTU SA - Periodic Processes](https://nasa.cs.nctu.edu.tw/sa/2021/slides/09_Periodic_Processes.pdf) (P8)
 
 ---
 
@@ -167,4 +167,4 @@ Usage
 - `HH:MM[am|pm] [month] [day]`
 - `[TIME] + [n] [time unit]` (`now + 2 minutes`)
 
-http://linux.vbird.org/linux_basic/0430cron.php
+[Cron](http://linux.vbird.org/linux_basic/0430cron.php)

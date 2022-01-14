@@ -141,7 +141,7 @@ So we don't have to manually write log messages into log files.
 - `INFO` - Normal operational messages
 - `DEBUG` - Info useful to developers for debugging the app
 
-https://success.trendmicro.com/solution/TP000086250-What-are-Syslog-Facilities-and-Levels
+[What are Syslog Facilities and Levels?](https://success.trendmicro.com/solution/TP000086250-What-are-Syslog-Facilities-and-Levels)
 
 <!--
 
@@ -162,7 +162,7 @@ The log level manifests how serious the condition is
 - `syslog` - `syslogd` internal messages
 - ...
 
-https://nasa.cs.nctu.edu.tw/sa/2021/slides/17_Syslog_and_LogRotate.pdf (P12)
+[NCTU SA - Syslog and LogRotate](https://nasa.cs.nctu.edu.tw/sa/2021/slides/17_Syslog_and_LogRotate.pdf (P12))
 
 <!--
 
@@ -180,7 +180,7 @@ The config file manifests how log messages should be recorded.
 
 The basic format is `{facility}.{level}  {action}`, `{facility}.{level}` part is also called "selector".
 
-We can also use property-based filter. https://www.rsyslog.com/doc/v8-stable/configuration/filters.html
+We can also use property-based filter. Check out [Property-Based Filters](https://www.rsyslog.com/doc/v8-stable/configuration/filters.html#property-based-filters).
 
 <!--
 
