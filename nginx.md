@@ -49,7 +49,7 @@ layout: two-cols
 - CSS: Standing for Cascading Stylesheets. It is used to style and beautify websites.
 - JS: Standing for JavaScript. It is a popular and versatile programming language and is used to make animation of websites, interact with client, communicate with server, etc.
 
-https://developer.mozilla.org/zh-TW/docs/Learn/JavaScript/First_steps/What_is_JavaScript
+[Demo](https://developer.mozilla.org/zh-TW/docs/Learn/JavaScript/First_steps/What_is_JavaScript)
 
 ---
 
@@ -240,5 +240,62 @@ https://nasa.cs.nctu.edu.tw/sa/2021/slides/18_Web.pdf (P9)
 <!--
 
 The first step is client sends request to server.png
+
+-->
+
+---
+
+# HTTP - Status Code
+
+HTTP status code manifests the status of response.
+
+It has five types, starting with `1` to `5`.
+- `100~199` - Informational response (the request was received and understood).
+- `200~299` - Successful response.
+- `300~399` - Redirects.
+- `400~499` - Client errors.
+- `500~599` - Server errors.
+
+<!--
+
+Not all number of them are used.
+
+-->
+
+---
+
+# HTTP - Status Code
+
+Let's see some common status code.
+
+- `200` - OK.
+- `301` - Moved Permanently. The server will also gives client a new URL to redirect, and client (browser) should redirect to the URL **permanently**.
+- `302` - Found. The server will also gives client a new URL to redirect, and client (browser) should redirect to the URL **this time** and continue to use current URL in the future.
+- `304` - Not Modified. The server tells client cache is still usable.
+- `500` - Internal Server Error.
+- `502` - Bad Gateway. When the server is the middleman, the error occurs when the upstream server fails.
+- `503` - Service Unavailable. The server is not ready to handle the request, and the possible reason can be under maintenance or overload. The error is often temporary.
+
+---
+
+# HTTP - Status Code
+
+- `400` - Bad Request. The client sends request with invalid syntax and server cannot understand.
+- `401` - Unauthorized. The client must authenticate itself first. (Not login yet)
+- `403` - Forbidden. The client doesn't have access right to the content.
+- `404` - Not Found.
+- `405` - Method Not Allowed.
+- ~~`418` - I'm a teapot: The server refuses the attempt to brew coffee with a teapot.~~ It is a April Fool's Day joke and is defined in [RFC 2324](https://datatracker.ietf.org/doc/html/rfc2324). 
+- `429` - Too Many Requests. The client has been over the rate limit.
+
+[HTTP Status Code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
+
+<!--
+
+We'll talk about HTTP methods later.
+
+418 is an interesting status code, you can check out the article and its RFC.
+
+[搶救茶壺大作戰：418 I am a teapot](https://blog.techbridge.cc/2019/06/15/iam-a-teapot-418/)
 
 -->
