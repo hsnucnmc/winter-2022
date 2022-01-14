@@ -39,5 +39,9 @@ img[alt~="avatar"] {
 }
 
 .two-columns .col-right {
-    margin-left: 3rem !important;
+    padding-left: 1rem !important;
+}
+
+.two-columns .col-left {
+    padding-right: 1rem !important;
 }

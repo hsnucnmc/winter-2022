@@ -42,7 +42,7 @@ layout: two-cols
 - Certificate - Signed by CA, it contains data of owner.
 - CSR - Certificate Signing Request, sent by user who want CA to sign a certificate for him or her.
 - CA - Certificate Authority, it is itself a certificate.
-- RCA - Root Certificate Authority, it only signs CA (including itself), not users. All the other CAs which are not RCA are called Intermediate CA. In chain of trust, it is also called trust anchor.
+- RCA - Root Certificate Authority, it only signs CA (including itself), not users. All the other CAs which are not RCA are called Intermediate CA.
 - X.509 - An ITU standard defining the format of public key certificate.
 - Chain of Trust - A hierarchy of certificates which is used to verify the validity of a certificate’s issuer, and it consists of a trust anchor, at least one intermediate CA and end-entity certificate.
 

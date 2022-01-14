@@ -81,7 +81,7 @@ Domain name is just a part of URL.
 # Background Knowledge - URL
 
 - Scheme
-  - The protocol, like http, https, ftp and so on.
+  - The protocol, like `http`, `https`, `ftp`, `file` and so on.
   - Followed by `://`.
 - Authority
   - Including domain name and port which are separated by a colon.
@@ -94,6 +94,118 @@ Domain name is just a part of URL.
 - Anchor
   - An anchor to another part of the resource itself.
   - Starting with `#`.
+
+---
+layout: two-cols
+---
+
+# Background Knowledge - Static vs. Dynamic Pages
+
+::left::
+
+Static Pages
+- Pages remain same.
+- Simple and fast.
+- Elements are informational.
+- Database is required.
+- No backend.
+
+::right::
+
+Dynamic Pages
+- The content depends on time, visitors, etc.
+- Complicated and slow.
+- Elements are functional and interactive.
+- Database is required.
+- Backend is writtern in PHP, Python, etc.
+
+::end::
+
+![](/static-dynamic-pages.jpg)
+
+<!--
+
+https://www.pluralsight.com/blog/creative-professional/static-dynamic-websites-theres-difference
+
+-->
+
+---
+layout: two-cols
+---
+
+# Background Knowledge - Proxy
+
+Proxy acts as a middleman, and there are two types of proxy.
+
+::left::
+
+Forward Proxy: Server don't know who is actual client.
+
+Advantages
+- Anonymous
+- Cache
+- Filtering
+
+::right::
+
+Reverse Proxy: Client don't know who is actual server.
+
+Advantages
+- Load balancing, HA
+- Cache
+- Server can change its address without influencing the service
+
+---
+
+# Background Knowledge - Proxy
+
+![](/proxy.jpg)
+
+https://medium.com/@mohsin061/forward-proxy-and-reverse-proxy-500b9bd4bf8e
+
+---
+layout: two-cols
+---
+
+# Background Knowledge - Virtual Host
+
+The concept of virtual hosts allows more than one Web site on one system or Web server.
+
+::left::
+
+IP-based Virtual Host
+- Every virtual host use a dedicated IP address.
+- There are not so many IP addresses.
+- For example, a server has two IP addresses `140.131.149.1` (external) and `10.1.1.1` (internal). By using virtual host, we can see different page when accessing the server with server IP addresses `140.131.149.1` and `10.1.1.1`.
+
+::right::
+
+Name-based Virtual Host
+- Every virtual host has a domain name.
+- Client must support HTTP 1.1 since server needs `Host` header.
+- For example, a server has domain name `example.com`, and all its subdomain points to it. By using virtual host, we can see different page when accessing the server with domain names `a.example.com` and `b.example.com`.
+
+<!--
+
+We'll talk about HTTP header later.
+
+-->
+
+---
+
+# Background Knowledge - SNI
+
+SNI stands for Server Name Indication, and it is used to tell server the host name client want to connect.
+
+When client uses HTTPS, the HTTP header is encrypted and server cannot read `Host` header, i.e., name-based virtual host cannot work, so server needs SNI to know which virtual host client want to connect.
+
+<!--
+
+Server is apartment. IP address is the street address. SNI is the apartment number.
+
+When a package is sent to the apartment by its address, the mailer needs apartment number to make right one receive it.
+
+-->
 
 ---
 
