@@ -19,6 +19,8 @@ siriuskoan
 - Relational and Non-relational Database
 - SQL
 - MySQL
+  - Installation
+  - `sqldump`
 
 ---
 
@@ -31,8 +33,6 @@ There are two types of database, one is relational and the other one is non-rela
   - It is structured and confined in format.
   - The data is easy to navigate.
   - Some popular examples: MySQL, MariaDB, PostgreSQL
-
-
 
 ---
 layout: two-cols
@@ -51,3 +51,277 @@ layout: two-cols
 ::right::
 
 ![](/nosql.png)
+
+<!--
+
+https://docs.microsoft.com/zh-tw/azure/architecture/data-guide/big-data/non-relational-data
+
+-->
+
+---
+
+# SQL
+
+SQL, standing for Structured Query Language, is a language for managing data in relational database management system.
+
+The statement consists of clause, expression and predicate (bool), and ends with `;`.
+
+---
+
+# SQL
+
+For example, `UPDATE users SET level = level * 2 WHERE name = 'siriuskoan'` is a simple SQL statement.
+
+- `UPDATE users` is `UPDATE` clause.
+- `SET level = level * 2` is `SET` clause.
+- `level * 2` is an expression.
+- `WHERE name = 'siriuskoan'` is `WHERE` clause.
+- `name = 'siriuskoan'` is predicate.
+- `'siriuskoan'` is expression.
+
+---
+
+# SQL
+
+CRUD means Create, Read, Update and Delete, they are the operations can be done to data.
+
+We will talk about CRUD commands in SQL.
+
+We will use the following table called `users` to do operations.
+
+![](/db-sample.png)
+
+---
+
+# SQL
+
+`WHERE` statement yields boolean value, and it cannot be used alone.
+
+It is a filter, so it can yields more than one records.
+
+If there are many conditions, the predicate can be concatenated with logical operators `AND`, `OR`, `NOT`.
+
+For example,
+- `WHERE username = 'siriuskoan'` will return `true` when the `username` column of this record is `siriuskoan`.
+- `WHERE age < 18` will return `true` when the `age` column of a record is less than `18`;
+- `WHERE age < 18 AND age > 65` will return `true` when the `age` column of a record is less than `18` OR greater than `65`.
+
+---
+
+# SQL
+
+`SELECT` statement is "R". It can select data from a table.
+
+The syntax is
+
+```sql
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+```
+
+`WHERE` clause can be omitted.
+
+For example,
+- `SELECT * FROM users` will yield the original table.
+- `SELECT username FROM users` will yield the three usernames.
+- `SELECT id FROM users WHERE username = 'siriuskoan'` will yield `1` since the `id` column of the record whose `username` column is `siriuskoan`.
+
+---
+
+# SQL
+
+`INSERT INTO` statement is "C", it can insert new record to a table.
+
+The syntax is
+
+```sql
+INSERT INTO table_name (column1, column2, ...)
+VALUES (value1, value2, ...);
+```
+
+`(column1, column2, ...)` can be omitted if all columns are assigned.
+
+For example,
+- `INSERT INTO users (username, level) VALUES ('cat', 100000)` inserts a record whose `id` is `4` (by `AUTOINCREMENT`), `username` is `cat` and `level` is `100000`.
+
+<!--
+
+We will talk about `AUTOINCREMENT` later.
+
+-->
+
+---
+
+# SQL
+
+`UPDATE` statement is "U", it can modify the existing records in a table.
+
+The syntax is
+
+```sql
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
+```
+
+`WHERE` clause can be omitted, but all records will be updated.
+
+For example,
+- `UPDATE users SET level = 10 WHERE username = 'siriuskoan'` updates the `level` column to `10` of the record whose `username` column is `siriuskoan`.
+- `UPDATE users SET level = level + 100 WHERE id > 1` updates the `level` column to the original value plus `10` of the record whose `id` column is greater than `1`.
+
+---
+
+# SQL
+
+`DELETE` statement is "D", it can remove existing records in a table.
+
+The syntax is
+
+```sql
+DELETE FROM table_name WHERE condition;
+```
+
+`WHERE` clause can be omitted, but **all records will be deleted**.
+
+For example,
+- `DELETE FROM users WHERE username = 'cat'` removes the fourth row since its `username` column is `cat`.
+
+---
+
+# SQL
+
+`CREATE DATABASE` statement can create a new database.
+
+The syntax is
+
+```sql
+CREATE DATABASE new_database_name;
+```
+
+`DROP DATABASE` statement can drop (delete) an existing database. It means all records, all tables and the database will be removed.
+
+The syntax is
+
+```sql
+DROP DATABASE database_name;
+```
+
+<!--
+
+After talking about CRUD of data, let's talk about CRUD of database and table, but not all of CRUD.
+
+-->
+
+---
+
+# SQL
+
+`CREATE TABLE` statement is used to create a new table in a database. We have to specify the structure of this table.
+
+The syntax is
+
+```sql
+CREATE TABLE table_name (
+    column1 data_type,
+    column2 data_type,
+    ...
+);
+```
+
+---
+
+# SQL
+
+For example,
+
+```sql
+CREATE TABLE users (
+    id int,
+    username varchar(255),
+    level int
+);
+```
+
+The statement can create a table with the same columns as the original table.
+
+<!--
+
+But not totally the same, we will talk about that later.
+
+-->
+
+---
+
+# SQL
+
+`DROP TABLE` statement can remove an existing table, including all records in it.
+
+The syntax is
+
+```sql
+DROP TABLE table_name;
+```
+
+For example,
+
+- `DROP TABLE users` will remove the original table.
+
+---
+
+# SQL
+
+`ALTER TABLE` statement is used to "alter" an existing table by adding, removing or modifying columns.
+
+To add a column, the syntax is
+
+```sql
+ALTER TABLE table_name
+ADD column_name data_type [DEFAULT default_value];
+```
+
+For example,
+- `ALTER TABLE users ADD age int DEFAULT 0;` will add a new column `age` whose data type is `int` with default value `0` to `users` table.
+
+<!--
+
+Modifying columns does not mean change its value but change its data type.
+
+-->
+
+---
+
+# SQL
+
+To drop a column, the syntax is
+
+```sql
+ALTER TABLE table_name
+DROP COLUMN column_name;
+```
+
+For example,
+- `ALTER TABLE users DROP COLUMN age` will deletes the `age` column.
+
+---
+
+# SQL
+
+To modify a column, the syntax for SQL Server is
+
+```sql
+ALTER TABLE table_name
+ALTER COLUMN column_name data_type;
+```
+For MySQL is
+
+```sql
+ALTER TABLE table_name
+MODIFY COLUMN column_name data_type;
+```
+
+For example,
+- `ALTER TABLE users ALTER COLUMN age varchar(255)` changes the data type of `age` column from `int` to `varchar(255)`;
+
+---
