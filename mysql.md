@@ -22,7 +22,7 @@ siriuskoan
   - Primary Key and Foreign Key
 - MySQL
   - Installation
-  - `sqldump`
+  - `mysqldump`
 
 ---
 
@@ -362,3 +362,103 @@ CREATE TABLE Orders (
 We will see some examples when talking about database normalization.
 
 -->
+
+---
+
+# MySQL - Primary Key and Foreign Key
+
+Finally, let's see the schema of the original table.
+
+```sql
+CREATE TABLE users (
+    id int NOT NULL AUTO_INCREMENT,
+    username varchar(255) NOT NULL UNIQUE,
+    level int NOT NULL
+);
+```
+
+<!--
+
+`AUTO_INCREMENT` is often used in PK, the value will be incremented by one for every new record.
+
+-->
+
+---
+
+# MySQL
+
+MySQL is a relational database management system. It is also the "M" in LAMP.
+
+Though MySQL is an open source software originally, it is a commercial software now.
+
+MariaDB is one of its fork, and it is open source.
+
+<!--
+
+LAMP: Linux, Apache, MySQL, PHP
+
+-->
+
+---
+
+# MySQL - Installation
+
+Install MySQL.
+
+`$ sudo apt install mysql-server`
+
+Check whether MySQL is running.
+
+`$ service mysql status`
+
+Do installation.
+
+`$ sudo mysql_secure_installation`
+
+It will ask you some questions such as whether you want to remove test database, and let you set new root password.
+
+Login MySQL and see whether it works correctly.
+
+`$ mysql -u root -p`
+
+<!--
+
+I answer yes for all questions.
+
+-->
+
+---
+
+# MySQL - Installation
+
+After installation, you can try to modify its config file `/etc/mysql/my.cnf`. There are some config you may want to check such as port, log location, etc.
+
+After you login the server, you can try to enter some statement and see whether it works.
+
+Let's create a database and a table now.
+
+```sql
+CREATE DATABASE users;
+CREATE TABLE users (
+    id int NOT NULL AUTO_INCREMENT,
+    username varchar(255) NOT NULL UNIQUE,
+    level int NOT NULL
+);
+```
+
+---
+
+# MySQL - `mysqldump`
+
+`mysqldump` is a tool for database backup.
+
+- Backup
+  - `mysqldump -h localhost -u root -p users > users_db_backup.sql` - Backup `users` database on localhost.
+  - `mysqldump -h localhost -u root -p users users > users_table_backup.sql` - Backup table `users` of database `users` on localhost.
+  - `mysqldump -u root -p --all-databases > backup.sql` - Backup all databases.
+
+- Restoration
+  - `mysql -u root -p < users_db_backup.sql` - Restore database `users`.
+  - `mysql -u root -p users < users_table_backup.sql` - Restore table `users` to database `users`.
+  - `mysql -u root -p < backup.sql` - Restore all databases.
+
