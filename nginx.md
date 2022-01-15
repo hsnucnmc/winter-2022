@@ -483,6 +483,30 @@ Remember to add the `ssl` parameter.
 
 ---
 
+# Nginx - SSL
+
+When a website enables SSL, it also needs to redirect all requests to HTTP to HTTPS.
+
+```nginx
+server {
+  listen 80 default_server;
+  listen [::] 80 default_server;
+  return 301 https://$host$request_url;
+  # or using rewrite module
+  # rewrite ^(.*) https://$host$1 permanent;
+}
+```
+
+<!--
+
+Rewrite is done in server-side, while redirect is done in client-side.
+
+Rewrite does not change the URL in browser, while redirect does.
+
+-->
+
+---
+
 # Nginx - Reverse Proxy
 
 As mentioned above, reverse proxy makes clients not know who is server.
