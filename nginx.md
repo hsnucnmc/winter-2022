@@ -36,8 +36,8 @@ layout: two-cols
 ::right::
 
 - Nginx
-  - Workflow
-  - Config
+  - Basic Config
+  - SSL
   - Reverse Proxy
   - Load Balancing
 
@@ -385,3 +385,154 @@ Etag is related to cache, when the etag changes, the resource is updated.
 -->
 
 ---
+
+# Nginx
+
+Nginx is an open source web server software.
+
+Nginx and Apache are two biggest web server.
+
+Nginx is easy to configure, faster, consume less memory than Apache.
+
+![](/nginx-icon.png)
+
+---
+
+# Nginx - Basic Config
+
+Before using it, we have to use `apt install nginx` to install Nginx.
+
+The main config file is `/etc/nginx/nginx.conf`, and we can include other config files.
+
+This file includes important config such as `user`, `pid`, `access_log`, `error_log`, etc., and it also includes some other config files in `conf.d` and `sites_enabled`.
+
+In `sites_enabled`, there is a file named `default`, which means the default sites. Moreover, `sites_enabled/default` is a soft link to `sites_available/default`.
+
+`sites_available` directory stores all hosts config files, no matter whether they are enabled or not, while `sites_enabled` directory stores enabled hosts config files, and the files are soft links to corresponding config files in `sites_available`.
+
+---
+
+# Nginx - Basic Config
+
+Nginx config consists of many "blocks". We will introduce some important blocks.
+
+- `server` - A virtual host, including some information such as `listen`, `server_name`, `access_log`, etc.
+- `location` - Routing, it directs different routes to different locations. The location can be regex as well.
+- `upstream` - Defining a group of servers.
+
+---
+
+# Nginx - Basic Config
+
+Let's see an example.
+
+```nginx
+server {
+        listen 8080 default_server;
+        listen [::]:8080 default_server;
+
+        root /home/siriuskoan/my-websites;
+        server_name sirius.cnmc.tw;
+
+        index index.html index.htm index.php;
+        location ~ \.php$ {
+               include snippets/fastcgi-php.conf;
+               fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+        }
+}
+```
+
+<!--
+
+This virtual host will listen on 8080 port and be the default server.
+
+`root` means the root of path in URL.
+
+`index` means which files can be index.
+
+The `location` block redirects `.php` file to PHP sock, i.e., let PHP server to handle it.
+
+-->
+
+---
+
+# Nginx - SSL
+
+To enable SSL, Nginx should have certificate and key file, adn both of them have been generated before.
+
+After that, the virtual host should listen to 443 port.
+
+```nginx
+server {
+  listen 80 default_server;
+  listen [::]:80 default_server;
+
+  listen 443 ssl default_server;
+  listen [::]:443 ssl default_server;
+
+  ssl_certificate /etc/nginx/ssl/nginx.crt;
+  ssl_certificate_key /etc/nginx/ssl/nginx.key;
+}
+```
+
+<!--
+
+Remember to add the `ssl` parameter.
+
+-->
+
+---
+
+# Nginx - Reverse Proxy
+
+As mentioned above, reverse proxy makes clients not know who is server.
+
+Hence, Nginx should forward the requests to another server and send its response back.
+
+```nginx
+server {
+  listen 80 default_server;
+
+  location / {
+    proxy_pass localhost:5000;
+  }
+}
+```
+
+In this way, all requests to Nginx server 80 port will be forwarded to `localhost:5000`.
+
+<!--
+
+There are still many options can be set. It is just an very easy example.
+
+-->
+
+---
+
+# Nginx - Load Balancing
+
+When there are many clients at the same time, one web server may not be able to handle all of them. Hence, we can solve it by having many web servers.
+
+Assume we have web server on `10.1.0.2` and `10.1.0.3`, and the load balancer is `10.1.0.1`.
+
+```nginx
+upstream my-web-servers {
+  server 10.1.0.2;
+  server 10.1.0.3;
+}
+
+server {
+  listen 80;
+  location / {
+    proxy_pass http://my-web-servers;
+  }
+}
+```
+
+<!--
+
+The config file is on `10.1.0.1`.
+
+We can also set its weight and how to do load balancing (round-robin, least-connected, IP-hashed).
+
+-->

@@ -69,6 +69,8 @@ There are some special characters can be used in time format.
 - `,` - Many values
 - `/` - Every time unit
 
+You can use [this website](https://crontab.guru/) to write correct config.
+
 <!--
 
 `/` just like Python for loop `step` argument
