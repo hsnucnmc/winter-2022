@@ -299,3 +299,89 @@ We'll talk about HTTP methods later.
 [搶救茶壺大作戰：418 I am a teapot](https://blog.techbridge.cc/2019/06/15/iam-a-teapot-418/)
 
 -->
+
+---
+
+# HTTP - Methods
+
+HTTP request methods indicate the desired action to be performed for a given resource.
+
+- `GET` - Requests a representation of the specified resource.
+- `HEAD` - Asks for a response only with header. The method is useful when a downloadable file is large, by checking the header first, you can know the size by `Content-Length` header.
+- `POST` - Sends data to server, and server add a record.
+- `PUT` - Replace, i.e., creates new resources or update current resources. (send full data)
+- `DELETE` - Deletes specified resources.
+- `CONNECT` - Establishes a tunnel to the server identified by the target resource.
+- `OPTIONS` - Show what methods can be used.
+- `TRACE` - Performs a message loop-back test along the path to the target resource. (Debug purpose)
+- `PATCH` - Applies partial modifications to a resource (send partial data).
+
+---
+
+# HTTP - Methods
+
+
+- Safe: It does not alter the state of the server.
+- Idempotent: An identical request can be made several times in a row and leaves the server in the same state.
+
+![](/http-method-compare.png)
+
+<!--
+
+Why `PATCH` is not idempotent?
+
+Since it is how to change a resource, but `PUT` is what to change to what
+
+-->
+
+---
+
+# HTTP - Request and Response
+
+Request header
+
+```http
+GET /home.html HTTP/1.1
+Host: developer.mozilla.org
+User-Agent: Mozilla/5.0(Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Connection: keep-alive
+Cache-Control: max-age=0
+```
+
+<!--
+
+User-Agent is the identification of the application, OS you use.
+
+Connection is whether the network connection stay open after the current tranasction finishes.
+
+-->
+
+---
+
+# HTTP - Request and Response
+
+Response header
+
+```http
+200 OK
+Access-Control-Allow-Origin: *
+Connection: Keep-Alive
+Content-Encoding: gzip
+Content-Type: text/html; charset=utf-8
+Date: Mon, 18 Jul 2016 16:06:00 GMT
+Etag: "c561c68d0ba92bbeb8b0f612a9199f722e3a621a"
+Keep-Alive: timeout=5, max=997
+Last-Modified: Mon, 18 Jul 2016 02:36:04 GMT
+Server: Apache
+Set-Cookie: mykey=myvalue; expires=Mon, 17-Jul-2017 16:06:00 GMT; Max-Age=31449600; Path=/; secure
+```
+
+<!--
+
+Etag is related to cache, when the etag changes, the resource is updated.
+
+-->
+
+---
