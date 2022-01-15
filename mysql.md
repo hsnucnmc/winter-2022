@@ -18,6 +18,8 @@ siriuskoan
 
 - Relational and Non-relational Database
 - SQL
+  - Basic Statements
+  - Primary Key and Foreign Key
 - MySQL
   - Installation
   - `sqldump`
@@ -81,7 +83,7 @@ For example, `UPDATE users SET level = level * 2 WHERE name = 'siriuskoan'` is a
 
 ---
 
-# SQL
+# SQL - Basic Statements
 
 CRUD means Create, Read, Update and Delete, they are the operations can be done to data.
 
@@ -93,7 +95,7 @@ We will use the following table called `users` to do operations.
 
 ---
 
-# SQL
+# SQL - Basic Statements
 
 `WHERE` statement yields boolean value, and it cannot be used alone.
 
@@ -108,7 +110,7 @@ For example,
 
 ---
 
-# SQL
+# SQL - Basic Statements
 
 `SELECT` statement is "R". It can select data from a table.
 
@@ -129,7 +131,7 @@ For example,
 
 ---
 
-# SQL
+# SQL - Basic Statements
 
 `INSERT INTO` statement is "C", it can insert new record to a table.
 
@@ -153,7 +155,7 @@ We will talk about `AUTOINCREMENT` later.
 
 ---
 
-# SQL
+# SQL - Basic Statements
 
 `UPDATE` statement is "U", it can modify the existing records in a table.
 
@@ -173,7 +175,7 @@ For example,
 
 ---
 
-# SQL
+# SQL - Basic Statements
 
 `DELETE` statement is "D", it can remove existing records in a table.
 
@@ -190,7 +192,7 @@ For example,
 
 ---
 
-# SQL
+# SQL - Basic Statements
 
 `CREATE DATABASE` statement can create a new database.
 
@@ -216,7 +218,7 @@ After talking about CRUD of data, let's talk about CRUD of database and table, b
 
 ---
 
-# SQL
+# SQL - Basic Statements
 
 `CREATE TABLE` statement is used to create a new table in a database. We have to specify the structure of this table.
 
@@ -232,7 +234,7 @@ CREATE TABLE table_name (
 
 ---
 
-# SQL
+# SQL - Basic Statements
 
 For example,
 
@@ -254,7 +256,7 @@ But not totally the same, we will talk about that later.
 
 ---
 
-# SQL
+# SQL - Basic Statements
 
 `DROP TABLE` statement can remove an existing table, including all records in it.
 
@@ -270,7 +272,7 @@ For example,
 
 ---
 
-# SQL
+# SQL - Basic Statements
 
 `ALTER TABLE` statement is used to "alter" an existing table by adding, removing or modifying columns.
 
@@ -292,7 +294,7 @@ Modifying columns does not mean change its value but change its data type.
 
 ---
 
-# SQL
+# SQL - Basic Statements
 
 To drop a column, the syntax is
 
@@ -306,7 +308,7 @@ For example,
 
 ---
 
-# SQL
+# SQL - Basic Statements
 
 To modify a column, the syntax for SQL Server is
 
@@ -325,3 +327,38 @@ For example,
 - `ALTER TABLE users ALTER COLUMN age varchar(255)` changes the data type of `age` column from `int` to `varchar(255)`;
 
 ---
+
+# SQL - Primary Key and Foreign Key
+
+When creating database, we can set some constraints such as `UNIQUE`, `NOT NULL` and `DEFAULT` which we have mentioned above.
+
+In addition to them, `PRIMARY KEY` and `FOREIGN KEY` are also important constraints, and we will discuss them.
+
+For example (from w3school),
+
+```sql
+CREATE TABLE Orders (
+    OrderID int NOT NULL PRIMARY KEY,
+    OrderNumber int NOT NULL,
+    PersonID int FOREIGN KEY REFERENCES Persons(PersonID)
+);
+```
+
+---
+
+# SQL - Primary Key and Foreign Key
+
+- Primary Key (PK)
+  - `PRIMARY KEY` constraint uniquely identifies each record in a table.
+  - For example, `id` can be the primary key since it is unique.
+  - A table can have only one primary key, but it can consists of many columns.
+
+- Foreign Key (FK)
+  - `FOREIGN KEY` constraint is a field in one table, and the field refers to the primary key in another table.
+  - For example, `id` is the PK in table `users`, then there can be a FK called `owner` which refers to `id` column in `users` in table `cars`.
+
+<!--
+
+We will see some examples when talking about database normalization.
+
+-->
