@@ -19,7 +19,6 @@ shenchris & siriuskoan
 - DNS
   - How It Works
   - Record Types
-  - Todo
 - Mail
   - MUA / MTA / MDA / MRA
   - Protocols
@@ -27,10 +26,9 @@ shenchris & siriuskoan
   - DKIM
   - SPF
   - SRS
-  - Todo
 - LDAP
   - How It Works
-  - Todo
+  - `ldapsearch`
 
 ---
 layout: cover
@@ -134,19 +132,6 @@ There are many types of DNS records, and each of them has its own usage.
 Two MX record means load balance.
 
 -->
-
----
-
-# DNS - Todo
-
-We have discussed some basic concept of DNS, and you can try to setup a DNS server by your own.
-
-- Install `bind` (The Berkeley Internet Name Domain system)
-- Setup master and slave.
-- Learn more about
-  - DNS sinkhole
-  - RNDC
-  - DNSSEC
 
 ---
 layout: cover
@@ -271,5 +256,139 @@ Besides, it will also check whether SPF and DKIM are passed. If any one of them 
 If SPF or DKIM is not used, DMARC will not check that.
 
 The action can be `reject`, `quarantine`, `none`.
+
+-->
+
+---
+layout: cover
+background: https://images.unsplash.com/photo-1491002052546-bf38f186af56?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1208&q=80
+---
+
+# LDAP
+
+siriuskoan
+
+---
+
+# LDAP
+
+Suppose that you are a system admin, and the system you are responsible for is large.
+
+There are 10 mail servers, 1 DNS master server, 2 DNS slave servers, 10 web servers including load balancer and 1 NFS server in this system.
+
+You and your team have to manage this system, so everyone should be able to login the server, so all of them have accounts on all these servers.
+
+That is, everyone has to add an account when a new server is set. But there are too many servers, it is unendurable.
+
+---
+
+# LDAP
+
+LDAP, standing for Lightweight Directory Access Protocol, is a good system to solve this problem.
+
+LDAP stores all users data in one server, and other servers can get users data from it to do authentication or get users' home directories (by NFS).
+
+LDAP is for Linux, and AD (Active Directory) is for Windows.
+
+---
+
+# LDAP - How It Works
+
+LDAP is hierarchical as well.
+
+It has DIT (Directory Information Tree), and it contains `dc`, `ou`, `cn`, `o`, `c`, etc.
+
+- `dc` - Domain Component (`edu`, `tw`, `com`, ...)
+- `ou` - Organization Unit (`People`, `Group`, ...)
+- `cn` - Common Name (Username)
+- `o` - Organization name
+- `c` - Country name
+
+---
+
+# LDAP - How It Works
+
+![](/ldap.jpg)
+
+<!--
+
+From http://dbaontap.com/2016/07/20/oem-13c-ldap-authentication/
+
+-->
+
+---
+
+# LDAP - How It Works
+
+- `dn` - Distinguish Name, it manifests one and only one node.
+- `rdn` - Relative Distinguish Name
+
+For example, my DN in CNMC may be `cn=siriuskoan,ou=People,dc=sirius,dc=cnmc,dc=tw` and RDN is `cn=siriuskoan`.
+
+A node stores many things, like real name, phone number, email, home directory, `objectClass`, etc.
+
+<!--
+
+They are called attributes.
+
+-->
+
+---
+
+# LDAP - How It Works
+
+`objectClass` is an entry template, just like database schema. It defines what an entry should contain.
+
+Some common `objectClass`:
+- `Person`
+- `PosixAccount`
+
+For example, `Person` defines an entry must contain `sn` (surname) and `cn` (common name), and it can contain password, phone number, etc.
+
+---
+
+# LDAP - How It Works
+
+LDIF stands for LDAP Interchange Format.
+
+It is the standard text file format for storing LDAP config information and directory content.
+
+For example, we have two LDAP entries.
+
+```systemd
+# siriuskoan, People, cnmc.tw
+dn: cn=siriuskoan,ou=People,dc=cnmc,dc=tw
+objectClass: person
+sn: koan
+
+# shenchris, People, cnmc.tw
+dn: cn=shenchris,ou=Person,dc=cnmc,dc=tw
+objectClass: person
+sn: shen
+```
+
+---
+
+# LDAP - `ldapsearch`
+
+We can use `ldapsearch` command to search LDAP entries.
+
+For example, we want to find user `siriuskoan` on `cnmc.tw`.
+
+`$ ldapsearch -h cnmc.tw "cn=siriuskoan"`
+
+Or we want to find the users who have `objectClass` `Person`.
+
+`$ ldapsearch -h cnmc.tw "objectClass=*"`
+
+Or list all users.
+
+`$ ldapsearch -h cnmc.tw ""`
+
+<!--
+
+The format is `ldapsearch [filter]`
+
+`-h` means host.
 
 -->
