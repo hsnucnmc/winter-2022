@@ -203,12 +203,12 @@ We can also use `*` to represents all facilities or levels.
 
 You may prefix each entry with the minus `-` sign to omit syncing the file after every logging. However, syncing will not be enabled by default.
 
-In addition to a sin`le `.`, we can use other operator
-- `.=`
-- `.<=`
-- `.>=` (the same as `.`)
-- `.<`
-- `.>`
+In addition to a single `.`, we can use other operator
+- ".="
+- ".<="
+- ".>=" (the same as `.`)
+- ".<"
+- ".>"
 
 ---
 

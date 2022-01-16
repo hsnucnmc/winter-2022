@@ -20,7 +20,7 @@ layout: two-cols
 
 ::left::
 
-- Background knowledge
+- Background Knowledge
   - HTML / CSS / JS
   - URL
   - Static vs. Dynamic Pages
@@ -45,9 +45,9 @@ layout: two-cols
 
 # Background Knowledge - HTML / CSS / JS
 
-- HTML: Standing for Hypertext Markup Language. It defines the structure of websites.
-- CSS: Standing for Cascading Stylesheets. It is used to style and beautify websites.
-- JS: Standing for JavaScript. It is a popular and versatile programming language and is used to make animation of websites, interact with client, communicate with server, etc.
+- HTML: Stands for Hypertext Markup Language. It defines the structure of websites.
+- CSS: Stands for Cascading Stylesheets. It is used to beautify websites.
+- JS: Stands for JavaScript. It is a popular and versatile programming language and is used to make animation of websites, interact with client, communicate with server, etc.
 
 [Demo](https://developer.mozilla.org/zh-TW/docs/Learn/JavaScript/First_steps/What_is_JavaScript)
 
@@ -90,7 +90,7 @@ Domain name is just a part of URL.
 - Parameters
   - Extra parameters provided to the server.
   - Starting with `?`.
-  - Key and value are separated by `=`, and key value pairs are separated by `&`.
+  - Key and value are separated by `=`, and key-value pairs are separated by `&`.
 - Anchor
   - An anchor to another part of the resource itself.
   - Starting with `#`.
@@ -107,7 +107,7 @@ Static Pages
 - Pages remain same.
 - Simple and fast.
 - Elements are informational.
-- Database is required.
+- Database is not required.
 - No backend.
 
 ::right::
@@ -115,9 +115,9 @@ Static Pages
 Dynamic Pages
 - The content depends on time, visitors, etc.
 - Complicated and slow.
-- Elements are functional and interactive.
-- Database is required.
-- Backend is writtern in PHP, Python, etc.
+- Elements are functional.
+- Database is usually required.
+- Backend is written in PHP, Python, etc.
 
 ::end::
 
@@ -139,7 +139,7 @@ Proxy acts as a middleman, and there are two types of proxy.
 
 ::left::
 
-Forward Proxy: Server don't know who is actual client.
+Forward Proxy: Server don't know who is the actual client.
 
 Advantages
 - Anonymous
@@ -148,7 +148,7 @@ Advantages
 
 ::right::
 
-Reverse Proxy: Client don't know who is actual server.
+Reverse Proxy: Client don't know who is the actual server.
 
 Advantages
 - Load balancing, HA
@@ -176,14 +176,14 @@ The concept of virtual hosts allows more than one Web site on one system or Web 
 IP-based Virtual Host
 - Every virtual host use a dedicated IP address.
 - There are not so many IP addresses.
-- For example, a server has two IP addresses `140.131.149.1` (external) and `10.1.1.1` (internal). By using virtual host, we can see different page when accessing the server with server IP addresses `140.131.149.1` and `10.1.1.1`.
+- For example, a server has two IP addresses `140.131.149.1` (external) and `10.1.1.1` (internal). By using IP-based virtual host, we can see different pages depending on the requesting IP addresses.
 
 ::right::
 
 Name-based Virtual Host
 - Every virtual host has a domain name.
 - Client must support HTTP 1.1 since server needs `Host` header.
-- For example, a server has domain name `example.com`, and all its subdomain points to it. By using virtual host, we can see different page when accessing the server with domain names `a.example.com` and `b.example.com`.
+- For example, a server has domain name `example.com`, and all its subdomain points to it. By using name-based virtual host, we can see different pages depending on the requesting domain name (maybe `a.example.com` and `b.example.com`).
 
 <!--
 
@@ -195,7 +195,7 @@ We'll talk about HTTP header later.
 
 # Background Knowledge - SNI
 
-SNI stands for Server Name Indication, and it is used to tell server the host name client want to connect.
+SNI stands for Server Name Indication, and it is used to tell server the host name client wants to connect to.
 
 When client uses HTTPS, the HTTP header is encrypted and server cannot read `Host` header, i.e., name-based virtual host cannot work, so server needs SNI to know which virtual host client want to connect.
 
@@ -211,7 +211,7 @@ When a package is sent to the apartment by its address, the mailer needs apartme
 
 # HTTP
 
-HTTP, standing for HyperText Transfer Protocol, is a protocol for fetching resources such as HTML documents.
+HTTP, standing for Hypertext Transfer Protocol, is a protocol for fetching resources such as HTML documents.
 
 It is the foundation of any data exchange on the Web.
 
@@ -290,6 +290,8 @@ Let's see some common status code.
 
 [HTTP Status Code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 
+[http.cat](http.cat)
+
 <!--
 
 We'll talk about HTTP methods later.
@@ -348,6 +350,7 @@ Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 Accept-Language: en-US,en;q=0.5
 Connection: keep-alive
 Cache-Control: max-age=0
+
 ```
 
 <!--
@@ -365,7 +368,7 @@ Connection is whether the network connection stay open after the current tranasc
 Response header
 
 ```http
-200 OK
+HTTP 1.1 200 OK
 Access-Control-Allow-Origin: *
 Connection: Keep-Alive
 Content-Encoding: gzip
@@ -406,7 +409,7 @@ The main config file is `/etc/nginx/nginx.conf`, and we can include other config
 
 This file includes important config such as `user`, `pid`, `access_log`, `error_log`, etc., and it also includes some other config files in `conf.d` and `sites_enabled`.
 
-In `sites_enabled`, there is a file named `default`, which means the default sites. Moreover, `sites_enabled/default` is a soft link to `sites_available/default`.
+In `sites_enabled`, there is a file named `default`, which means the default servers. Moreover, `sites_enabled/default` is a soft link to `sites_available/default`.
 
 `sites_available` directory stores all hosts config files, no matter whether they are enabled or not, while `sites_enabled` directory stores enabled hosts config files, and the files are soft links to corresponding config files in `sites_available`.
 
@@ -458,7 +461,7 @@ The `location` block redirects `.php` file to PHP sock, i.e., let PHP server to 
 
 # Nginx - SSL
 
-To enable SSL, Nginx should have certificate and key file, adn both of them have been generated before.
+To enable SSL, Nginx should have certificate and key file, and both of them have been generated before.
 
 After that, the virtual host should listen to 443 port.
 
@@ -537,7 +540,9 @@ There are still many options can be set. It is just an very easy example.
 
 When there are many clients at the same time, one web server may not be able to handle all of them. Hence, we can solve it by having many web servers.
 
-Assume we have web server on `10.1.0.2` and `10.1.0.3`, and the load balancer is `10.1.0.1`.
+Assume we have web server on `10.1.0.2` and `10.1.0.3`, and the load balancer is `140.131.149.1`.
+
+It this way, `10.1.0.2` and `10.1.0.3` can be not public, but by reverse proxy, visitors can still access to them.
 
 ```nginx
 upstream my-web-servers {

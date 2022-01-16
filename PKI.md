@@ -15,11 +15,11 @@ siriuskoan
 ---
 
 # Outline
-- What Is PKI
+- What is PKI
 - OpenSSL
   - Create a Self-signed Certificate - Method 1
   - Create a Self-signed Certificate - Method 2
-  - Test Server With OpenSSL
+  - Test Server with OpenSSL
 
 ---
 
@@ -139,16 +139,18 @@ After doing that, you will get a certificate file `cert.pem` and a key file `key
 
 In addition to only generating key and certificate, you can create your own CA and use it to sign more certificates.
 
-1. `openssl genrsa -des3 -out ca.key 4096`
 
-    Generate CA key (`-des3` allows you to use a password to protect your CA key).
+1.  Generate CA key (`-des3` allows you to use a password to protect your CA key).
 
-2. `openssl req -x509 -new -nodes -key ca.key -sha256 -days 365 -out ca.crt`
+    `$ openssl genrsa -des3 -out ca.key 4096`
 
-    Create CA cert by key.pem
-3. `openssl genrsa -out host.key 4096`
+2.  Create CA cert by key.pem
 
-    Generate host key.
+    `$ openssl req -x509 -new -nodes -key ca.key -sha256 -days 365 -out ca.crt`
+
+3.  Generate host key.
+
+    `$ openssl genrsa -out host.key 4096`
 
 <!--
 
@@ -218,9 +220,9 @@ However, it does not work correctly, so we want to connect to it and check what'
 
 We can use `openssl s_client -connect sirius.cnmc.tw:465` to connect to the server.
 
-If the mail server SMTPS is working, you can see the message like `220 sirius.cnmc.tw ESMTP Postfix`, and then it will wait you to enter some commands such as `AUTH LOGIN`, which means that we can start debugging.
+If the mail server SMTPS is working, you can see a message like `220 sirius.cnmc.tw ESMTP Postfix`, and then we can start debugging.
 
-Besides the `220` message, you will see some SSL/TLS information such as server certificate, TLS version and so on.
+Besides `220` message, you will see some SSL/TLS information such as server certificate, TLS version and so on.
 
 <!--
 
