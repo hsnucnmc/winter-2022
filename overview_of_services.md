@@ -21,8 +21,12 @@ shenchris & siriuskoan
   - Record Types
   - Todo
 - Mail
-  - MUA / MTA / MDA
+  - MUA / MTA / MDA / MRA
+  - Protocols
   - How It Works
+  - DKIM
+  - SPF
+  - SRS
   - Todo
 - LDAP
   - How It Works
@@ -155,8 +159,117 @@ siriuskoan
 
 ---
 
-# Mail - MUA / MTA / MDA
+# Mail - Protocols
 
-MUA, MTA and MDA are important things in mail system.
+In mail system, there are three important protocols.
 
-- MUA - Mail User Agent. It is 
+- `SMTP` - It is used to send and receives mails through mail servers.
+- `IMAP` - It is used to allow users get their mails from anywhere.
+- `POP3` - It is used to allow users get their mails from anywhere.
+
+The difference between `IMAP` and `POP3` is that the the former still stores the mails after users read them, while the latter removes them after being read.
+
+They can all be encrypted and become `SMTPS`, `IMAPS` and `POP3S`.
+
+---
+
+# Mail - MUA / MTA / MDA / MRA
+
+`MUA`, `MTA`, `MDA` and `MRA` play important roles in mail system.
+
+- `MUA` - Mail User Agent. It is a software between users and mail server. Users can use it to write email and send it. For example, `Outlook`, `Thunderbird` and webmail are all MUA.
+- `MTA` - Mail Transfer Agent. It is so-called "mail server". It receives and sends (relays) emails from or to other mail servers, and gives users their own emails. For example, `Postfix` and built-in `sendmail` are MTA.
+- `MDA` - Mail Delivery Agent. It decides what to do to emails. It can receives them to INBOX, sends to another MTA, etc. For example, `Procmail`.
+- `MRA` - Mail Retrieval Agent. It gets email from remote server and allows users to access their mailboxes. For example, `Dovecot`.
+
+---
+
+# Mail - How It Works
+
+![](/MxA.png)
+
+<!--
+
+User writes mail on MUA -> MUA sends it to MTA -> MTA transfer to MDA -> MDA do filter and other things to it -> MDA deliver it to MRA
+
+-->
+
+---
+
+# Mail - Open Relay
+
+A mail server can sends mail to other mail servers when it finds that the mail does not belong to it.
+
+However, if a mail server relays all mails to other mail servers, it may overwhelms other mail servers.
+
+It is considered to be an open relay server and will be banned.
+
+To prevent this, every mail server should configure correctly that which domain it should relay.
+
+---
+
+# Mail
+
+Next we are talking about security.
+
+Before getting started, we have to know that `SMTP` is not secure.
+
+An email is just a text file, and after user logins the mail server, he or she can send mail with any address and sender.
+
+Therefore, it is easy to send a fake mail to anyone.
+
+However, people must not allow this thing happens, so there are many mechanisms to solve this problem.
+
+[關於 email security 的大小事 — 原理篇](https://tech-blog.cymetrics.io/posts/crystal/email-sec-theory/)
+
+---
+
+# Mail - SPF
+
+SPF stands for Sender Policy Framework. The mechanism makes all domain has one DNS record that records which IP addresses its mail servers have.
+
+By doing so, if a bad guy uses his or her own mail server to send mail as someone in other domain, the mail will not pass SPF test and thus being classifies as not safe or spam.
+
+However, if the mail is intercepted and the content is changed by a bad guy, SPF is useless.
+
+---
+
+# Mail - SRS
+
+SPF is good, however, if the mail server want to forward the mail, SPF test will fail since the sender domain and forwarder domain is not the same.
+
+SRS, standing for Sender Rewriting Scheme, is used in order to solve this problem.
+
+It can rewrite the sender and make it pass SPF test. After passing SPF, the destination server can convert it back to original sender and show it to receivers.
+
+---
+
+# Mail - DKIM
+
+To prevent the situation mentioned above, DKIM is purposed.
+
+DKIM stands for DomainKeys Identified Mail. The mechanism encrypts the some of the headers (specified by mail server) and content and add its hash to header.
+
+In this way, if the mail is intercepted and modified by others, DKIM can detect it and mark the mail unsafe.
+
+However, the sender shown on MUA is `header.from`, and SPF and DKIM check `smtp.MailFrom`.
+
+Therefore, if a bad guy setup a mail server and set `header.from` as fake one (for example, `gmail.com`), `smtp.MailFrom` as original one, both of SPF and DKIM cannot detect this.
+
+---
+
+# Mail - DMARC
+
+DMARC stands for Domain-based Message Authentication, Reporting and Conformance.
+
+It will check whether `header.from` and `smtp.MailFrom` are the same, and the process is called "alignment".
+
+Besides, it will also check whether SPF and DKIM are passed. If any one of them are not passed, the action admin specifies will be performed.
+
+<!--
+
+If SPF or DKIM is not used, DMARC will not check that.
+
+The action can be `reject`, `quarantine`, `none`.
+
+-->
