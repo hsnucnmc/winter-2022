@@ -57,10 +57,10 @@ background: none
 A package management tool.
 
 - `apt update`
-- `apt search {keyword}`
-- `apt install {package name}`
+- `apt search <keyword>`
+- `apt install <package name>`
 - `apt upgrade [package name]`
-- `apt remove {package name}`
+- `apt remove <package name>`
 - `apt autoremove`
 
 <!-- apt-get is old, now apt is recommended, but apt-get can help you to do more low-level things -->
@@ -116,13 +116,13 @@ When in normal mode, type
 
 > Tmux is a terminal multiplexer, it enables a number of terminals to be created, accessed, and controlled from a single screen.
 > 
-> Linux mannual page
+> *Linux mannual page*
 
 The tool can help you manage multiple terminal.
 
 You can detach the session so that the session will keep running even if your SSH connection is closed.
 
-It also has many great features such as screen spliting, sync screen, customization and so on.
+It also has many great features such as screen spliting, screen syncing, customization and so on.
 
 ---
 layout: iframe
@@ -142,6 +142,8 @@ layout: two-cols
     - You can create multiple windows in a session.
 - Pane
     - You can get a pane by spliting a window.
+
+![tmux](/tmux-ctrl-b-w.png)
 
 ::right::
 
@@ -196,8 +198,13 @@ In C, you should include stdio, which represents standard input/output
 <!-- Some examples here -->
 
 ---
+layout: two-cols
+---
 
 # IO Redirection
+
+::left::
+
 ```
 cat << EOF | grep ls | uniq > test 2>&1
 ls
@@ -207,6 +214,14 @@ ps
 EOF
 ```
 
+The result is
+
+```
+ls
+```
+
+::right::
+
 ```
 cat << EOF > out.txt
 test
@@ -214,6 +229,8 @@ test2
 test3
 EOF
 ```
+
+It will generate a file containing the three lines.
 
 <!-- Some cat examples here -->
 
@@ -227,7 +244,7 @@ background: none
 ---
 
 # `ls`
-First thing to know: everything you see in Linux is file, i.e.,
+First thing to know: everything you see in Linux is a file, i.e.,
 - Directory is file
 - Link is file
 - Your screen is file
@@ -258,7 +275,13 @@ Some special path
 -rw-rw----    1 siriuskoan wheel     217 Apr 8 14:08 test
 ```
 
-<!-- permission hard_link owner group size filename -->
+<!--
+
+permission hard_link owner group size filename
+
+`ll` is alias, and not all shell has this alias
+
+-->
 
 ---
 
@@ -290,15 +313,15 @@ named pipe: just like a pipe, but it has name, you can pass some value to it by 
 # `ln`
 > `ln` - make links between files
 >
-> Linux mannual page
+> *Linux mannual page*
 
 There are two types of links
 - hard: another entrypoint of file
 - symbolic (soft): just like "shortcut" in Windows
 
-To create hard link, use `ln original_file hard_link`
+To create hard link, use `ln [original_file] [hard_link]`
 
-To create soft link, use `ln -s original_file soft_link`
+To create soft link, use `ln -s [original_file] [soft_link]`
 
 <!-- the difference between hard and soft link and commands -->
 
@@ -309,7 +332,7 @@ Every file has its own inode. Use `ls -i` to view the inode of file.
 
 A hard link means the same inode as original file, but a soft link has different one.
 
-When a hard link exists, the file will exist. Otherwise, the data block and inode will be taken back by OS.
+The data block and inode will be taken back by OS once all hard links are deleted.
 
 When the system says "no more space", it may mean you don't have space for another new inode.
 
@@ -336,6 +359,12 @@ Every three characters shows permissions of a class of user, which are owner, us
 
 # `chmod`
 
+![](/rwx.jpg)
+
+---
+
+# `chmod`
+
 Sometimes, the permissions not only contain `r`, `w` and `x` but also contain `s`, which means setuid or setgid (depending on where the `s` is).
 
 They allow users to execute a file as its owner or as people in its group.
@@ -346,7 +375,7 @@ They allow users to execute a file as its owner or as people in its group.
 
 - A file with permissions `rwxrwsr-x`.
 
-  A user who is classified as "others" can execute the file, and due to the `s` in group permissions, when the user execute the file, ge or she will become a member in its group.
+  A user who is classified as "others" can execute the file, and due to the `s` in group permissions, when the user execute the file, he or she will become a member in its group.
 
 A real example is `/user/bin/passwd`: `-rwsr-xr-x`.
 
@@ -381,6 +410,7 @@ int main() {
     gid_t effect_gid = getegid();
     printf("ruid=%d, euid=%d\n", real_uid, effect_uid);
     printf("rgid=%d, egid=%d\n", real_gid, effect_gid);
+    return 0;
 }
 ```
 
@@ -444,7 +474,7 @@ It is the same when we use `chown` and `chgrp`.
 
 > grep - print lines that match patterns
 >
-> Linux manual page
+> *Linux manual page*
 
 It is a very useful tool when checking log.
 
@@ -491,7 +521,7 @@ Two ways to connect
 
 - Use `ssh-keygen` to generate public key and private key, and use `ssh-copy-id` to copy your key to remote server.
 
-  In this way, no password is required.
+In this way, no password is required.
 
 <!--
 we will not talk about crypto, just about how to use it, but you should know about key.
@@ -511,7 +541,7 @@ steps:
 
 # `su` / `sudo`
 
-Both of them make you have higher priviledges, but there are still some differences between them.
+Both of them make you have higher privileges, but there are still some differences between them.
 - `su` gives you full permissions of root. When using it, you should use **root password**.
 - `sudo` gives you temporary higher permissions for executing certain commands. When using it, you should use **your own password**.
 
@@ -521,7 +551,7 @@ Both of them make you have higher priviledges, but there are still some differen
 
 # `su` / `sudo`
 
-Using `sudo` is much better than using `su` when a team maintains a system.
+Using `sudo` is much better than using `su` when a team maintains a system. The reasons are
 - It can give different team members different permissions, i.e., your system can have better access control.
 - Every command executed with `sudo` will be recorded in `/var/log/secure`, so if there is something wrong, it is easy to find out who did it.
 
@@ -601,11 +631,11 @@ Some common errors
 
 > `scp` - secure copy (remote file copy program)
 >
-> Linux manual page
+> *Linux manual page*
 
 `scp` uses SSH protocol to copy file from one host to another.
 
-`scp` is a good firend when we need to copy file from one host to another host. However, `scp` has been deprecated, we should use `rsync` instead.
+`scp` is a good friend when we need to copy file from one host to another host. However, `scp` has been deprecated, we should use `rsync` instead.
 
 ---
 
@@ -635,7 +665,7 @@ Options
 
 > `rsync` - a fast, versatile, remote (and local) file-copying tool
 >
-> Linux manual page
+> *Linux manual page*
 
 `rsync` can do what `cp` and `scp` do, moreover, it is more efficient.
 
@@ -673,15 +703,15 @@ They are process and system monitoring tools.
 
 > ps - report a snapshot of the current processes
 >
-> Linux manual page
+> *Linux manual page*
 
 > top - display Linux processes
 >
-> Linux manual page
+> *Linux manual page*
 
 > htop - interactive process viewer
 >
-> Linux manual page
+> *Linux manual page*
 
 ---
 
@@ -753,11 +783,11 @@ Just open terminal and show `top` and `htop`
 
 > du - estimate file space usage
 >
-> Linux manual page
+> *Linux manual page*
 
 > df - report file system disk space usage
 >
-> Linux manual page
+> *Linux manual page*
 
 ---
 
@@ -820,6 +850,8 @@ After finishing your script, remember to `chmod` it to allow users to execute it
 The commands just like functions `print`, `int` in Python.
 
 There are many things to be understood in shell script, but we cannot talk about them due to limit of time, even the syntax is skipped.
+
+Shebang is not so easy, and the shell location may differ from OS from OS, you should be careful.
 
 -->
 

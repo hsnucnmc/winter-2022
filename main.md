@@ -14,6 +14,15 @@ fonts:
 layout: two-cols
 ---
 
+---
+
+# Special Thanks
+- CSY
+- Sean
+- Freeman
+
+---
+
 # $ whoami
 
 ::left::
@@ -80,7 +89,7 @@ layout: two-cols
 # So, what will you learn
 
 - Some system administration skills
-- Knowledge about how some services work (or even setup one by yourself)
+- Knowledge about how services work (or even setup one by yourself)
 - How to use web framework and docker
 
 ![word cloud](/word_cloud.png)
@@ -91,4 +100,4 @@ background: none
 ---
 
 ## Questions?
-Feel free to ask me, I will be kind.
+Feel free to ask me, I am kind.
