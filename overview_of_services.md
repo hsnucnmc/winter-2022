@@ -26,6 +26,7 @@ shenchris & siriuskoan
   - DKIM
   - SPF
   - SRS
+  - DMARC
 - LDAP
   - How It Works
   - `ldapsearch`
@@ -43,9 +44,9 @@ shenchris & siriuskoan
 
 # DNS
 
-- IP Address - Unique identifiers to every device connect to the Internet. Similiar to physical address of a house.
+- IP Address - A numerical label to every device connect to the Internet. Similiar to address of a house.
 - Domain Name - A name that maps to a numeric IP address, used to access a website.
-- DNS - Like photo book, it maps domain name to IP address.
+- DNS - Like phone book, it maps domain name to IP address.
   
   `www.hs.ntnu.edu.tw` -> `203.68.92.132`
   )
@@ -71,14 +72,24 @@ DNS is hierarchical and decentralized (prevent single point failure).
 
 ![](/dns-hier.png)
 
+<!--
+
+It is not totally "decentralized".
+
+There are many servers, and every one of them is important. But resolver still needs to ask root nameserver.
+
+However, if we talk about cache, then it's decentralized.
+
+-->
+
 ---
 
 # DNS - How It Works
 
 - Root Nameserver - First stop in a recursive resolver query. It directs the recursive resolver to a TLD nameserver based on the extension of that domain (`.com`, `.org`, ...)
-- TLD - Standing for Top Level Domain server. It maintains information for domain names that share a common domain extension.
+- TLD - Standing for Top Level Domain. There are many TLD, and each one has its own TLD nameserver. It maintains information for domain names that share a common domain extension.
 - Authoritative Nameserver - Last stop in the query. It returns the IP address or alias for the requested domain name back to the DNS Recursor.
-- Recursive Resolver (DNS Recursor) - Middleman between a client and a DNS nameserver.
+- Resolver (DNS Recursor) - Agent between a client and a DNS nameserver.
 
 <!--
 
@@ -96,6 +107,12 @@ DNS has two kinds of ways to do recursive query. One is iterative query, and the
 
 - Iterative Query - Resolver asks root nameserver for the target domain name, and the root nameserver tells it to find another domain name server (TLD). When the resolver gets the response, it asks the TLD for the target, and the TLD tells it next server to ask. The steps repeat until the resolver asks the authoritative nameserver and get the final result.
 - Recursive Query - Resolver asks root nameserver for the target domain name, and the root nameserver asks the next one (TLD). The steps repeat until the the query reaches the authoritative nameserver and get the final result. After getting it, the query goes back and gives the result to the resolver.
+
+<!--
+
+Skip this page.
+
+-->
 
 ---
 
@@ -115,9 +132,9 @@ Red is iterative query and blue is recursive query.
 
 There are many types of DNS records, and each of them has its own usage.
 
-- `A` record - It contains the IP address of the domain name. For example, `www.hs.ntnu.edu.tw` has `A` record `203.68.92.132`.
+- `A` record - It contains the IP address of the domain name. For example, `203.68.92.132` is an `A` record of `www.hs.ntnu.edu.tw`.
 - `AAAA` record - It contains the IPv6 address of the domain name.
-- `NS` record - It is the IP address of the zone's authoritative nameserver. For example, `hs.ntnu.edu.tw` has `NS` record `dns.hs.edu.tw`.
+- `NS` record - It is the IP address of the zone's authoritative nameserver. For example, `dns.hs.edu.tw` is an `NS` record of `hs.ntnu.edu.tw`.
 
 ---
 
@@ -167,6 +184,12 @@ They can all be encrypted and become `SMTPS`, `IMAPS` and `POP3S`.
 - `MDA` - Mail Delivery Agent. It decides what to do to emails. It can receives them to INBOX, sends to another MTA, etc. For example, `Procmail`.
 - `MRA` - Mail Retrieval Agent. It gets email from remote server and allows users to access their mailboxes. For example, `Dovecot`.
 
+<!--
+
+MDA and MRA are not very important, but the first two are important, they are client and server respectively.
+
+-->
+
 ---
 
 # Mail - How It Works
@@ -201,7 +224,7 @@ Before getting started, we have to know that `SMTP` is not secure.
 
 An email is just a text file, and after user logins the mail server, he or she can send mail with any address and sender.
 
-Therefore, it is easy to send a fake mail to anyone.
+Therefore, it is easy to send a spoofing mail to anyone.
 
 However, people must not allow this thing happens, so there are many mechanisms to solve this problem.
 
@@ -217,6 +240,12 @@ By doing so, if a bad guy uses his or her own mail server to send mail as someon
 
 However, if the mail is intercepted and the content is changed by a bad guy, SPF is useless.
 
+<!--
+
+The allowed IP addresses are in TXT record.
+
+-->
+
 ---
 
 # Mail - SRS
@@ -231,9 +260,9 @@ It can rewrite the sender and make it pass SPF test. After passing SPF, the dest
 
 # Mail - DKIM
 
-To prevent the situation mentioned above, DKIM is purposed.
+To prevent the situation mentioned above, DKIM is proposed.
 
-DKIM stands for DomainKeys Identified Mail. The mechanism encrypts the some of the headers (specified by mail server) and content and add its hash to header.
+DKIM stands for DomainKeys Identified Mail. The mechanism encrypts some of the headers (specified by mail server) and content and add its hash to header.
 
 In this way, if the mail is intercepted and modified by others, DKIM can detect it and mark the mail unsafe.
 
@@ -249,13 +278,17 @@ DMARC stands for Domain-based Message Authentication, Reporting and Conformance.
 
 It will check whether `header.from` and `smtp.MailFrom` are the same, and the process is called "alignment".
 
-Besides, it will also check whether SPF and DKIM are passed. If any one of them are not passed, the action admin specifies will be performed.
+Besides, it will also check whether SPF and DKIM are passed. If any one of them are not passed, the action admin specifies (policies) will be performed.
+
+It will send report about authentication information to domain admin.
 
 <!--
 
 If SPF or DKIM is not used, DMARC will not check that.
 
-The action can be `reject`, `quarantine`, `none`.
+The policies can be `reject`, `quarantine`, `none`.
+
+Here shows an email, remember to show SPF, SRS, DKIM and DMARC.
 
 -->
 
@@ -276,7 +309,7 @@ Suppose that you are a system admin, and the system you are responsible for is l
 
 There are 10 mail servers, 1 DNS master server, 2 DNS slave servers, 10 web servers including load balancer and 1 NFS server in this system.
 
-You and your team have to manage this system, so everyone should be able to login the server, so all of them have accounts on all these servers.
+You and your team have to manage this system, so everyone should be able to login to the server, so all of them have accounts on all these servers.
 
 That is, everyone has to add an account when a new server is set. But there are too many servers, it is unendurable.
 

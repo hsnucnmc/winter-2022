@@ -68,6 +68,8 @@ SQL, standing for Structured Query Language, is a language for managing data in 
 
 The statement consists of clause, expression and predicate (bool), and ends with `;`.
 
+SQL keywords are case insensitive.
+
 ---
 
 # SQL
@@ -112,7 +114,7 @@ For example,
 
 # SQL - Basic Statements
 
-`SELECT` statement is "R". It can select data from a table.
+`SELECT` statement is "R" in CRUD. It can select data from a table.
 
 The syntax is
 
@@ -133,7 +135,7 @@ For example,
 
 # SQL - Basic Statements
 
-`INSERT INTO` statement is "C", it can insert new record to a table.
+`INSERT INTO` statement is "C" in CRUD, it can insert new record to a table.
 
 The syntax is
 
@@ -157,7 +159,7 @@ We will talk about `AUTOINCREMENT` later.
 
 # SQL - Basic Statements
 
-`UPDATE` statement is "U", it can modify the existing records in a table.
+`UPDATE` statement is "U" in CRUD, it can modify the existing records in a table.
 
 The syntax is
 
@@ -177,7 +179,7 @@ For example,
 
 # SQL - Basic Statements
 
-`DELETE` statement is "D", it can remove existing records in a table.
+`DELETE` statement is "D" in CRUD, it can remove existing records in a table.
 
 The syntax is
 
@@ -240,9 +242,9 @@ For example,
 
 ```sql
 CREATE TABLE users (
-    id int,
-    username varchar(255),
-    level int
+    id INT,
+    username VARCHAR(255),
+    level INT
 );
 ```
 
@@ -284,7 +286,7 @@ ADD column_name data_type [DEFAULT default_value];
 ```
 
 For example,
-- `ALTER TABLE users ADD age int DEFAULT 0;` will add a new column `age` whose data type is `int` with default value `0` to `users` table.
+- `ALTER TABLE users ADD age int DEFAULT 0;` will add a new column `age` whose data type is `INT` with default value `0` to `users` table.
 
 <!--
 
@@ -324,7 +326,7 @@ MODIFY COLUMN column_name data_type;
 ```
 
 For example,
-- `ALTER TABLE users ALTER COLUMN age varchar(255)` changes the data type of `age` column from `int` to `varchar(255)`;
+- `ALTER TABLE users ALTER COLUMN age varchar(255)` changes the data type of `age` column from `INT` to `VARCHAR(255)`;
 
 ---
 
@@ -338,9 +340,9 @@ For example (from w3school),
 
 ```sql
 CREATE TABLE Orders (
-    OrderID int NOT NULL PRIMARY KEY,
-    OrderNumber int NOT NULL,
-    PersonID int FOREIGN KEY REFERENCES Persons(PersonID)
+    OrderID INT NOT NULL PRIMARY KEY,
+    OrderNumber INT NOT NULL,
+    PersonID INT FOREIGN KEY REFERENCES Persons(PersonID)
 );
 ```
 
@@ -371,9 +373,9 @@ Finally, let's see the schema of the original table.
 
 ```sql
 CREATE TABLE users (
-    id int NOT NULL AUTO_INCREMENT,
-    username varchar(255) NOT NULL UNIQUE,
-    level int NOT NULL
+    id INT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    level INT NOT NULL
 );
 ```
 
@@ -403,23 +405,23 @@ LAMP: Linux, Apache, MySQL, PHP
 
 # MySQL - Installation
 
-Install MySQL.
+1. Install MySQL.
 
-`$ sudo apt install mysql-server`
+   `$ sudo apt install mysql-server`
 
-Check whether MySQL is running.
+2. Check whether MySQL is running.
 
-`$ service mysql status`
+   `$ service mysql status`
 
-Do installation.
+3. Do installation.
 
-`$ sudo mysql_secure_installation`
+   `$ sudo mysql_secure_installation`
 
-It will ask you some questions such as whether you want to remove test database, and let you set new root password.
+4. It will ask you some questions such as whether you want to remove test database, and let you set new root password.
 
-Login MySQL and see whether it works correctly.
+5. Login MySQL and see whether it works correctly.
 
-`$ mysql -u root -p`
+   `$ mysql -u root -p`
 
 <!--
 
@@ -440,9 +442,9 @@ Let's create a database and a table now.
 ```sql
 CREATE DATABASE users;
 CREATE TABLE users (
-    id int NOT NULL AUTO_INCREMENT,
-    username varchar(255) NOT NULL UNIQUE,
-    level int NOT NULL
+    id INT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    level INT NOT NULL
 );
 ```
 

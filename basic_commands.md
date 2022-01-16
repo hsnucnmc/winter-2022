@@ -14,17 +14,17 @@ siriuskoan
 ---
 
 # You Should Already Know
-- `cd` - change directory
-- `rm` - remove
-- `mkdir` - create directory
-- `touch` - create file
-- `cp` - copy
-- `cat` - get the content of a file and **more things**
-- `mv` - move or rename
-- `pwd` - get current (working) directory
-- `less` - a powerful file viewer
-- `man` - show mannual page
-- `which` - get executable file path
+- `cd` - Change directory
+- `rm` - Remove
+- `mkdir` - Create directory
+- `touch` - Create file
+- `cp` - Copy
+- `cat` - Get the content of a file and **more things**
+- `mv` - Move or rename
+- `pwd` - Get current (working) directory
+- `less` - A powerful file viewer
+- `man` - Show mannual page
+- `which` - Get executable file path
 
 <!-- cat more things -->
 
