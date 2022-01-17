@@ -122,6 +122,8 @@ CC, standing for Creative Commons, is a non-profit organization.
 
 It releases a series of licenses, known as CC licenses.
 
+[創用 CC 是什麼？](http://creativecommons.tw/explore)
+
 ![](/cc-logo.png)
 
 ---
