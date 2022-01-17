@@ -18,7 +18,7 @@ siriuskoan
 
 - What Is Open Source
 - License
-- Community in TW
+- Communities in TW
 
 ---
 
@@ -156,5 +156,21 @@ The four elements make six licenses
 <!--
 
 ND and SA cannot be together
+
+-->
+
+---
+
+# Communities in TW
+
+- SITCON - 學生計算機年會
+- COSCUP - 開源人年會
+- HITCON - 台灣駭客年會
+- PYCON
+- MOPCON - 行動科技年會
+
+<!--
+
+They are not totally about open source
 
 -->
