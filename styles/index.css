@@ -38,6 +38,10 @@ img[alt~="avatar"] {
     margin-left: 5rem;
 }
 
+img[alt~="cc"] {
+    display: inline !important;
+}
+
 .two-columns .col-right {
     padding-left: 1rem !important;
 }

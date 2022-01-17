@@ -114,4 +114,47 @@ After strict GPL, let's see the opposite
 
 -->
 
+---
 
+# License
+
+CC, standing for Creative Commons, is a non-profit organization.
+
+It releases a series of licenses, known as CC licenses.
+
+![](/cc-logo.png)
+
+---
+
+# License
+
+CC has four elements of license
+- NoDerivatives (ND) - This means that if a user creates an adaptation of the work, it may not be shared.
+- Attribution (BY) - This element guarantees that creators are given proper credit.
+- NonCommercial (NC) - This element prohibits the use of content for commercial purposes.
+- ShareAlike (SA) - This means that any adaptation of the work must be licensed under the same license.
+
+![cc](/nd.png)
+![cc](/by.png)
+![cc](/nc.png)
+![cc](/sa.png)
+
+---
+
+# License
+
+The four elements make six licenses
+- CC-BY - Attribution license
+- BY-SA - Attribution-ShareAlike license
+- BY-NC - Attribution-NonCommercial license
+- BY-NC-SA - Attribution-NonCommercial-ShareAlike license
+- BY-ND - Attribution-NoDerivatives license
+- BY-NC-ND - Attribution-NonCommercial-NoDerivatives license
+
+![](/by-nc-nd.png)
+
+<!--
+
+ND and SA cannot be together
+
+-->
