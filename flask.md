@@ -325,6 +325,8 @@ Jinja is a templating engine, and Flask use it.
 
 We can view it as running program in HTML templates.
 
+![](/jinja-logo.png)
+
 <!--
 
 You'll understand better after see the examples.
@@ -515,3 +517,71 @@ In Jinja, we can use `get_flashed_messages` to get the messages.
 
 -->
 
+---
+
+# Jinja
+
+A website has many pages, like main page, login page, register page, dashboard, etc.
+
+If we create an HTML template for every page, there will be too many same part. For example, `head` tag is almost the same for every page.
+
+Therefore, we can do template inheritance to reduce duplicate parts.
+
+In Jinja, we can create `base.html` as the base template, and all the other HTML templates can inherit from it.
+
+---
+layout: two-cols
+---
+
+# Jinja
+
+::left::
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>
+    {% block title %}{% endblock %}
+  </title>
+</head>
+<body>
+  <nav>nav</nav>
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+  <footer>footer</footer>
+</body>
+```
+
+::right::
+
+```html
+{% extends "base.html" %}
+
+{% block title %}Index Page{% endblock %}
+
+{% block content %}
+<p>
+    {{ user }}
+</p>
+{% endblock %}
+```
+
+<!--
+
+The file on the left is `base.html`, and every HTML template can inherit from it.
+
+It has full HTML structure.
+
+The `block` statement is a "placeholder", the template inheriting from it can replace the part.
+
+The file on the right is `index.html`.
+
+By using `extends` keyword, it can inherit from `base.html`.
+
+The `block` statement is used to replace the placeholder in `base.html`.
+
+-->
