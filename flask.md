@@ -248,9 +248,9 @@ def set_cookie():
 
 @app.route("/delete")
 def delete_cookie():
-	response = make_response("")
-	response.delete_cookie("user")
-	return response
+    response = make_response("")
+    response.delete_cookie("user")
+    return response
 
 app.run(host="127.0.0.1", port=8080)
 ```
@@ -316,3 +316,202 @@ When client tries to access `/dont_see`, Flask app will return status code `403`
 It is useful when client does something bad, and you can abort the bad action immediately, it has the same effect as `return`.
 
 -->
+
+---
+
+# Jinja
+
+Jinja is a templating engine, and Flask use it.
+
+We can view it as running program in HTML templates.
+
+<!--
+
+You'll understand better after see the examples.
+
+-->
+
+---
+
+# Jinja
+
+Before getting started, we have to create a folder named `templates` where Flask get templates from.
+
+Besides, we need to create `index.html` where we will put HTML template and Jinja code.
+
+<!--
+
+There are two files in examples, one is `app.py` and the other one is `index.html`.
+
+-->
+
+---
+layout: two-cols
+---
+
+# Jinja
+
+
+```python
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route("/")
+def index_page():
+    name = "cat"
+    return render_template("index.html", username=name)
+
+app.run(host="127.0.0.1", port=8080)
+```
+
+```html
+<body>
+  {{ username }}
+</body>
+```
+
+<!--
+
+The head part of HTML is been omitted in this example because of lack of space.
+
+You can see the `render_template` function, it is used to let Jinja render HTML.
+
+It will run the code in specified HTML template and return the HTML.
+
+Finally, `return` will give the HTML to client.
+
+The text in `{{ }}` is variable.
+
+Jinja will not touch the other parts without `{}`.
+
+-->
+
+---
+
+# Jinja
+
+```python
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route("/")
+def index_page():
+    return render_template("index.html", state="running")
+
+app.run(host="127.0.0.1", port=8080)
+```
+
+```html
+<body>
+  {% if state == "running" %}
+  <p>running</p>
+  {% else %}
+  <p>terminated</p>
+  {% endif %}
+</body>
+```
+
+<!--
+
+Next part is `if` statement.
+
+The condition of `if` is in `{% %}`.
+
+-->
+
+---
+layout: two-cols
+---
+
+# Jinja
+
+::left::
+
+```python
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route("/")
+def index_page():
+    users = [
+        "Mary",
+        "Cat",
+        "Meow",
+        "Harry"
+    ]
+    return render_template(
+      "index.html",
+      users=users
+    )
+app.run(host="127.0.0.1", port=8080)
+```
+
+::right::
+
+```html
+<body>
+  <h1>User list</h1>
+  <ul>
+    {% for user in users %}
+    <li>
+      {{ user | upper }}
+      {{ loop.index }}
+    </li>
+    {% endfor %}
+  </ul>
+</body>
+```
+
+<!--
+
+This part is `for`.
+
+`| upper` is filter, the `upper` filter is built-in, it will convert lower letters to upper letters.
+
+You can also create your own filter by using `@app.template_filter()` decorator.
+
+`loop.index` is Jinja built-in variable, it stores the index in loop, starting from 1.
+
+-->
+
+---
+
+# Jinja
+
+```python
+from flask import Flask, render_template, flash
+
+app = Flask(__name__)
+
+@app.route("/")
+def index_page():
+    flash("Wrong!", category="warning")
+    return render_template("index.html")
+
+app.config["SECRET_KEY"] = "rc498mt6848"
+app.run(host="127.0.0.1", port=8080)
+```
+
+```html
+<body>
+  {% for category, message in get_flashed_messages(with_categories=True) %}
+  <div class="{{ category }}">{{ message }}</div>
+  {% endfor %}
+</body>
+```
+
+<!--
+
+`flash` function sends messages to frontend, and let it show the messages.
+
+In Jinja, we can use `get_flashed_messages` to get the messages.
+
+`app.config["SECRET_KEY"]` is a very important line here.
+
+`flash` function stores the message in `session`, and if you use `session`, you have to set `SECRET_KEY` for your application.
+
+-->
+
