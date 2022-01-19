@@ -312,13 +312,7 @@ For example,
 
 # SQL - Basic Statements
 
-To modify a column, the syntax for SQL Server is
-
-```sql
-ALTER TABLE table_name
-ALTER COLUMN column_name data_type;
-```
-For MySQL is
+To modify a column, the syntax is
 
 ```sql
 ALTER TABLE table_name
@@ -326,7 +320,7 @@ MODIFY COLUMN column_name data_type;
 ```
 
 For example,
-- `ALTER TABLE users ALTER COLUMN age varchar(255)` changes the data type of `age` column from `INT` to `VARCHAR(255)`;
+- `ALTER TABLE users MODIFY COLUMN age varchar(255)` changes the data type of `age` column from `INT` to `VARCHAR(255)`;
 
 ---
 
@@ -373,7 +367,7 @@ Finally, let's see the schema of the original table.
 
 ```sql
 CREATE TABLE users (
-    id INT NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL UNIQUE,
     level INT NOT NULL
 );
