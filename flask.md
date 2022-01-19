@@ -585,3 +585,126 @@ By using `extends` keyword, it can inherit from `base.html`.
 The `block` statement is used to replace the placeholder in `base.html`.
 
 -->
+
+---
+
+# Factory Pattern
+
+Factory Pattern is design pattern.
+
+By following the pattern, we can obtain a new application by calling the same function.
+
+For example, we will create a function called `create_app` later, and we can create different with different arguments.
+
+---
+
+# Factory Pattern
+
+![](/directory.png)
+
+<!--
+
+In Flask, we design an application in factory pattern.
+
+To do this, we have to follow a certain directory structure.
+
+`app/` is the core of the application, it contains three folders, and they are blueprints, which basically consists of many routes.
+
+`static/` is the folder containing CSS, JS files, images, etc.
+
+`templates/` is the folder containing HTML template and jinja files.
+
+`tests/` is the folder containing tests, but we will not talk about this.
+
+`manage.py` contains some Flask commands, but we will not talk about this.
+
+`__init__.py` means the directory is a package and is importable.
+
+-->
+
+---
+
+# Factory Pattern
+
+`app/configs.py`
+
+```python
+class Config:
+    SECRET_KEY = "cyn54g544mxng"
+    DEBUG = True
+```
+
+<!--
+
+`config.py` contains all config of the application.
+
+It is under `app/`.
+
+We add different config for different env.
+
+-->
+
+---
+
+# Factory Pattern
+
+`app/__init__.py`
+
+```python
+def create_app(env):
+    app = Flask(__name__, template_folder="../templates", static_folder="../static")
+    app.config.from_object(configs.Config)
+
+    from .main import main_bp
+    app.register_blueprint(main_bp)
+
+    from .user import user_bp
+    app.register_blueprint(user_bp)
+
+    return app
+```
+
+<!--
+
+`create_app` is the core of factory pattern.
+
+It is used to create apps with different config.
+
+`main_bp` and `user_bp` are blueprints, we will see them in next page.
+
+We implement the blueprints in `main/` and `user/`, and then register them to the `app` object.
+
+-->
+
+---
+
+# Factory Pattern
+
+`app/main/__init__.py`
+
+```python
+from flask import Blueprint
+
+main_bp = Blueprint("main", __name__)
+
+from . import views
+```
+
+`app/main/views.py`
+
+```python
+from . import main_bp
+
+@main_bp.route("/", methods=["GET"])
+def index_page():
+    return "index"
+```
+
+<!--
+
+Making a blueprint to bind a route is the same as making `app` to do it.
+
+-->
+
+---
+
