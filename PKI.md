@@ -40,7 +40,7 @@ layout: two-cols
 ::left::
 
 - Certificate - Signed by CA, it contains data of owner.
-- CSR - Certificate Signing Request, sent by user who want CA to sign a certificate for him or her.
+- CSR - Certificate Signing Request, sent by user who wants CA to sign a certificate for him or her.
 - CA - Certificate Authority, it is itself a certificate.
 - RCA - Root Certificate Authority, it only signs CA (including itself), not users. All the other CAs which are not RCA are called Intermediate CA.
 - X.509 - An ITU standard defining the format of public key certificate.
@@ -127,11 +127,15 @@ You can use `openssl` command to generate key and certificate.
 - `-out` - The output certificate file.
 - `-days` - Number of days cert is valid for.
 
+<!--
+
+Method 1
+
 Then you will be asked some questions about you.
 
 After doing that, you will get a certificate file `cert.pem` and a key file `key.pem`, and you can use them in your service such as web server and mail server.
 
-<!-- Method 1 -->
+-->
 
 ---
 
@@ -177,6 +181,10 @@ Method 2
 <!--
 
 Method 2
+
+Actually the method is not reasonable.
+
+CSR exists since user don't want to send private key to CA, but in this case, CSR and CA on the same host.
 
 -->
 

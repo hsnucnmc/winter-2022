@@ -192,7 +192,7 @@ While the selector provides a way to classify log messages by its source and lev
 
 # Syslog - Config
 
-We can also combine many selectors by `,` and `;`.
+We can also combine many selectors by `,` or `;`.
 
 ```systemd
 {facility1},{facility2}.{level} {action}

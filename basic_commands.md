@@ -353,7 +353,7 @@ Recall the information shown in `ll`.
 
 For directory, `rwx` represent "can `ls` in it", "can write a file in it" and "can `cd` into it".
 
-Every three characters shows permissions of a class of user, which are owner, user in the group, others, respectively.
+Every set of three characters shows permissions of a certain class of users, including the owner, the users in the group,and the other users, respectively. 
 
 ---
 
@@ -667,7 +667,7 @@ Options
 >
 > *Linux manual page*
 
-`rsync` can do what `cp` and `scp` do, moreover, it is more efficient.
+`rsync` can do what `cp` and `scp` do; moreover, it is more efficient.
 
 Advantages
 - Speed
@@ -743,7 +743,7 @@ STAT: state, `I` means idle, `S` means sleeping, the second letter is additional
 
 # `ps` / `top` / `htop`
 
-Program is dead, when you execute it, it becomes a process.
+Program is dead, and when you execute it, it becomes a process.
 
 Attributes of the processes
 - PID, PPID - Process ID and Parent PID
@@ -841,7 +841,7 @@ We can program in shell language, which has variables, flow control, input, outp
 
 Shell language is a interpreted language, it can be run directly in your shell.
 
-Actually, shell script consists of the commands we use, but with some important components such as special variables, exit code and so on.
+Actually, shell script consists of the commands we use, and with some important components such as special variables, exit code and so on.
 
 After finishing your script, remember to `chmod` it to allow users to execute it.
 
