@@ -88,7 +88,7 @@ error_log /var/log/nginx/error.log;
 
 ---
 
-# Log Ratate
+# Log Rotate
 
 As the time elapsed, the log files got larger and larger.
 

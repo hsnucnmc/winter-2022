@@ -188,6 +188,8 @@ They can all be encrypted and become `SMTPS`, `IMAPS` and `POP3S`.
 
 MDA and MRA are not very important, but the first two are important, they are client and server respectively.
 
+There is another role - MSA.
+
 -->
 
 ---
@@ -197,18 +199,16 @@ MDA and MRA are not very important, but the first two are important, they are cl
 ![](/MxA.png)
 
 <!--
-
 User writes mail on MUA -> MUA sends it to MTA -> MTA transfer to MDA -> MDA do filter and other things to it -> MDA deliver it to MRA
-
 -->
 
 ---
 
 # Mail - Open Relay
 
-A mail server can sends mail to other mail servers when it finds that the mail does not belong to it.
+A mail server can sends (relays) mails to other mail servers when it finds that it cannot handle them.
 
-However, if a mail server relays all mails to other mail servers, it may overwhelms other mail servers.
+However, if a mail server relays all mails to other mail servers, it may be used by bad buys to overwhelm other mail servers.
 
 It is considered to be an open relay server and will be banned.
 
@@ -218,17 +218,21 @@ To prevent this, every mail server should configure correctly that which domain 
 
 # Mail
 
-Next we are talking about security.
-
-Before getting started, we have to know that `SMTP` is not secure.
-
 An email is just a text file, and after user logins the mail server, he or she can send mail with any address and sender.
 
 Therefore, it is easy to send a spoofing mail to anyone.
 
-However, people must not allow this thing happens, so there are many mechanisms to solve this problem.
+However, people must not allow this to happen, so there are many mechanisms to solve this problem.
 
 [關於 email security 的大小事 — 原理篇](https://tech-blog.cymetrics.io/posts/crystal/email-sec-theory/)
+
+<!--
+
+Next we are talking about security.
+
+Before getting started, we have to know that `SMTP` is not secure.
+
+-->
 
 ---
 
@@ -236,7 +240,7 @@ However, people must not allow this thing happens, so there are many mechanisms 
 
 SPF stands for Sender Policy Framework. The mechanism makes all domain has one DNS record that records which IP addresses its mail servers have.
 
-By doing so, if a bad guy uses his or her own mail server to send mail as someone in other domain, the mail will not pass SPF test and thus being classifies as not safe or spam.
+By doing so, if a bad guy uses his or her own mail server to send mail as someone in other domain, the mail will not pass SPF test and thus being classifies as unsafe mail or spam.
 
 However, if the mail is intercepted and the content is changed by a bad guy, SPF is useless.
 
@@ -254,7 +258,13 @@ SPF is good, however, if the mail server want to forward the mail, SPF test will
 
 SRS, standing for Sender Rewriting Scheme, is used in order to solve this problem.
 
-It can rewrite the sender and make it pass SPF test. After passing SPF, the destination server can convert it back to original sender and show it to receivers.
+It can rewrite the sender and make it pass SPF test. After passing SPF test, the destination server can convert it back to original sender and show it to receivers.
+
+<!--
+
+This part is additional.
+
+-->
 
 ---
 
@@ -270,6 +280,12 @@ However, the sender shown on MUA is `header.from`, and SPF and DKIM check `smtp.
 
 Therefore, if a bad guy setup a mail server and set `header.from` as fake one (for example, `gmail.com`), `smtp.MailFrom` as original one, both of SPF and DKIM cannot detect this.
 
+<!--
+
+Back to the problem SPF cannot solve.
+
+-->
+
 ---
 
 # Mail - DMARC
@@ -278,7 +294,7 @@ DMARC stands for Domain-based Message Authentication, Reporting and Conformance.
 
 It will check whether `header.from` and `smtp.MailFrom` are the same, and the process is called "alignment".
 
-Besides, it will also check whether SPF and DKIM are passed. If any one of them are not passed, the action admin specifies (policies) will be performed.
+Besides, it will also check whether SPF and DKIM are passed. If any one of them are not passed, the action (policy) admin specifies will be performed.
 
 It will send report about authentication information to domain admin.
 
@@ -336,6 +352,12 @@ It has DIT (Directory Information Tree), and it contains `dc`, `ou`, `cn`, `o`, 
 - `cn` - Common Name (Username)
 - `o` - Organization name
 - `c` - Country name
+
+<!--
+
+Some of the components you may have seen in certificate part.
+
+-->
 
 ---
 

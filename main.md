@@ -19,7 +19,9 @@ layout: two-cols
 # Special Thanks
 - CSY
 - Sean
-- Freeman
+- Freeman Hung
+- Williamlin
+- ...
 
 ---
 
