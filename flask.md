@@ -1024,7 +1024,6 @@ However, we don't create `db` object in `app/__init__.py`, instead, we put the i
 1.  Create `app/database/models.py` and add the following lines.
     ```python
     from flask_sqlalchemy import SQLAlchemy
-
     db = SQLAlchemy()
     ```
 
@@ -1033,7 +1032,9 @@ However, we don't create `db` object in `app/__init__.py`, instead, we put the i
     from .models import db
     ```
 
-3.  Finally, we initialize Flask-SQLAlchemy with `app` by adding `db.init_app(app)` in `create_app` function.
+3.  Add `SQLALCHEMY_DATABASE_URI = "sqlite:///data.db"` to `Config` object.
+
+4.  Finally, we initialize Flask-SQLAlchemy with `app` by adding `db.init_app(app)` in `create_app` function.
 
 ---
 
@@ -1168,4 +1169,50 @@ class users(db.Model):
 
 ---
 
+# Flask Extensions - Flask-Migrate
 
+Flask-Migrate is an extension that handles SQLAlchemy database migrations for Flask applications.
+
+The database operations are made available through the Flask command-line interface.
+
+---
+
+# Flask Extensions - Flask-Migrate
+
+Simply, database migration is the version control of the schema of database.
+
+Every migration is a file with SQL statements, and they specify how to migrate to the version and how to rollback from the version.
+
+It is useful when there are many developers developing a project. Someone can modify the schema and create a migration file, and then the others can use the migration file to migrate their local testing database to newer version.
+
+---
+
+# Flask Extensions - Flask-Migrate
+
+We have to initialize Flask-Migrate first.
+
+1.  Add the following lines to `manage.py`.
+    ```python
+    from flask_migrate import Migrate
+    migrate = Migrate(app, db)
+    ```
+
+2.  And then we can try to run command `flask db init` to initialize the migration.
+
+---
+
+# Flask Extensions - Flask-Migrate
+
+After setting up, we can start using it.
+
+1.   Run `flask db migrate -m "description"` to generate a migration file.
+
+2.   Run `flask db upgrade` to migrate to current Flask-SQLAlchemy version.
+
+3.   Edit the table schema.
+
+4.   Run `flask db migrate` to create a new migration file since it detects the schema has been changed.
+
+5.   Run `flask db upgrade` to migrate to the newer version.
+
+6.   If something goes wrong, run `flask db downgrade` to rollback.
