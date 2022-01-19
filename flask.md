@@ -23,7 +23,11 @@ siriuskoan
 - Functions
 - Jinja
 - Factory Pattern
-- Flask Family
+- Flask Extensions
+  - Flask-Login
+  - Flask-WTF
+  - Flask-SQLAlchemy
+  - Flask-Migrate
 
 ---
 
@@ -36,6 +40,8 @@ It is easy to get started, and it is scalable as well.
 [ithelp 鐵人賽](https://ithelp.ithome.com.tw/users/20120263/ironman/4032)
 
 <!--
+
+HSNU repair system is written in Flask.
 
 prerequisites
 
@@ -703,6 +709,137 @@ def index_page():
 <!--
 
 Making a blueprint to bind a route is the same as making `app` to do it.
+
+-->
+
+---
+
+# Flask Extensions
+
+Flask itself is a simple and lightweight framework, so there are many important functions it does not have.
+
+However, there are many Flask extensions that add functionality to a Flask application.
+
+For example,
+
+- Flask-Login
+- Flask-WTF
+- Flask-SQLAlchemy
+- Flask-Migrate
+- Flask-Mail
+- Flask-RESTful
+- ...
+
+<!--
+
+We'll talk about the first four.
+
+-->
+
+---
+
+# Flask Extensions - Flask-Login
+
+Flask-Login is a Flask extension that provides user session management.
+
+It handles the common tasks of logging in, logging out, and remembering your users’ sessions over extended periods of time.
+
+To user this extension, we must set `SECRET_KEY`.
+
+---
+
+# Flask Extensions - Flask-Login
+
+To use this extension, we have to modify `create_app` function.
+
+`app/__init__.py`
+
+```python
+from flask_login import LoginManager
+login_manager = LoginManager()
+def create_app(env):
+    app = Flask(__name__, template_folder="../templates", static_folder="../static")
+    app.config.from_object(configs[env])
+    login_manager.init_app(app)
+
+    from .main import main_bp
+    app.register_blueprint(main_bp)
+    from .user import user_bp
+    app.register_blueprint(user_bp)
+    return app
+```
+
+<!--
+
+I think it is the most complex one.
+
+`login_manager` is the core of Flask-Login.
+
+`login_manager.init_app(app)` means init `login_manager` with `app` context.
+
+-->
+
+---
+
+# Flask Extensions - Flask-Login
+
+We need user loader.
+
+`app/__init__.py`
+
+```python
+from flask_login import LoginManager, UserMixin
+class User(UserMixin):
+    pass
+
+@login_manager.user_loader
+def load(user_id):
+    user_id = int(user_id)
+    sessionUser = User()
+    sessionUser.id = user.id
+    return sessionUser
+```
+
+<!--
+
+`user_loader` is the most important function when setting `Flask-Login`.
+
+When user has logined, Flask app may want to get some data of the user, then it needs this function to tell it.
+
+We should get username and other information by `user_id` in database or somewhere else.
+
+-->
+
+---
+
+# Flask Extensions - Flask-Login
+
+```python
+from flask import Flask
+from flask_login import login_user
+
+@app.route("/login")
+def login_page():
+    user = User()
+    user.id = 1
+    login_user(user)
+    return "Success"
+
+@app.route("/logout")
+def logout_page():
+    logout_user()
+    return "Success"
+```
+
+<!--
+
+Now we have set Flask-Login.
+
+We can use some functions.
+
+`login_user` function is used to login a user.
+
+`logout_user` function is used to logout current user.
 
 -->
 
