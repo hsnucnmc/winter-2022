@@ -18,8 +18,10 @@ siriuskoan
 - Introduction
 - Container v.s VM
 - How It Works
-- `Dockerfile`
-- `docker-compose`
+- Preparation
+- Starting to Use Docker
+  - `Dockerfile`
+  - `docker-compose`
 
 ---
 
@@ -72,4 +74,130 @@ From https://www.weave.works/blog/a-practical-guide-to-choosing-between-docker-c
 
 ---
 
+# How It Works
 
+We need an "image" to create a container.
+
+An image is a template containing the library, config, etc. for the applications.
+
+Images are in "repository", and [Docker Hub](https://hub.docker.com/) plays the role similar to GitHub.
+
+Developers can develop their own images and push them to Docker Hub, and they can also use others images.
+
+For example, if we want to build a load balancer with Nginx, we can use [Nginx image](https://hub.docker.com/_/nginx).
+
+Every image has a name, besides, 
+
+---
+
+# Preparation
+
+Before starting using Docker, we have to do some preparation first.
+
+- Install it.
+
+  `$ sudo apt install docker.io`
+
+- Check whether Docker is running.
+
+  `$ sudo service docker status`
+
+---
+
+# Starting to Use Docker
+
+After installation, we can now use Docker to create container.
+
+- Run the first Docker container with `hello-world` image.
+
+  `$ sudo docker run hello-world`
+
+- Check container status.
+
+  `$ sudo docker ps -a`
+
+- Remove the container.
+
+  `$ sudo docker rm [container name or container id]`
+
+<!--
+
+- `docker run` command will check whether the image is in local storage. If not, it will fetch the image from Docker Hub.
+
+  It will automatically give the contain a name and print its id.
+
+  Unable to find image 'hello-world:latest' locally` means it cannot find it locally, and `latest: Pulling from library/hello-world` means it fetches it from remote repo.
+
+- `-a` will show all containers, while no `-a` will only show active ones.
+
+-->
+
+---
+
+# Starting to Use Docker
+
+- Check the logs.
+
+  `$ sudo docker logs [container name or container id]`
+
+- Show the images stored in local repository.
+
+  `$ sudo docker images`
+
+<!--
+
+- You can see `hello-world` image with tag `latest`.
+
+[hello-world image](https://hub.docker.com/_/hello-world)
+
+-->
+
+---
+
+# Starting to Use Docker
+
+`docker run [OPTIONS] IMAGE [COMMAND] [ARGS]`
+
+Options
+- `-d` or `--detach` - Run container in background and print container ID
+- `--name` - Set container's name
+- `--rm` - Automatically remove the container after it exits
+- `-p [IP]:[CONTAINER PORT]:[HOST PORT]/[PROTOCOL]` - Publish a container's port(s) to the host, for example, `127.0.0.1:80:8080/tcp` expose `80` port on container to `8080` port on host
+- `-it` - Allocate a pseudo-TTY connected to the container’s stdin
+- `--read-only` - Mount the container's root filesystem as read only
+
+<!--
+
+Let's check out some `docker run` usage.
+
+`-i` and `-t` are two different options, and we can enter the container and run some commands by combining them.
+
+-->
+
+---
+
+# Starting to Use Docker
+
+We can also give some commands to container by using `docker run`.
+
+For example
+
+- `$ sudo docker run ubuntu bash` can create an container with ubuntu image and start a bash session.
+- `$ sudo docker run ubuntu touch /root/test.txt` can create a file called `test.txt` after the container is created.
+
+---
+
+# Starting to Use Docker
+
+`docker exec` can run a command in a running container.
+
+1. `$ sudo docker run --name my_ubuntu -d -it ubuntu` - Create an ubuntu container.
+2. `$ sudo docker exec -it my_ubuntu bash` - Enter the ubuntu container with bash.
+
+<!--
+
+Notice the `-it`.
+
+Demo the whole section.
+
+-->
