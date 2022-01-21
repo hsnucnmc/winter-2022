@@ -49,3 +49,8 @@ img[alt~="cc"] {
 .two-columns .col-left {
     padding-right: 1rem !important;
 }
+
+.language-yaml code span {
+    font-size: 14px !important;
+}
+

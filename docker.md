@@ -142,7 +142,7 @@ After installation, we can now use Docker to create container.
 
 - Show the images stored in local repository.
 
-  `$ sudo docker images`
+  `$ sudo docker images ls`
 
 <!--
 
@@ -201,3 +201,171 @@ Notice the `-it`.
 Demo the whole section.
 
 -->
+
+---
+
+# Starting to Use Docker - `Dockerfile`
+
+Sometimes the image itself is too simple, we may need to enter the container, run some commands and configure the server to the way we want.
+
+However, it is error-prone since it is done by human.
+
+We can use `Dockerfile` to complete the work automatically.
+
+`Dockerfile` specifies the instructions to build a container, and Docker will automatically follow the instructions and configure the container as we want.
+
+---
+
+# Starting to Use Docker - `Dockerfile`
+
+Let's see an example, and we will explain the example line by line.
+
+```dockerfile
+FROM python:3.9.5
+WORKDIR /code
+ENV ENVIRONEMENT="PRODUCTION"
+COPY . /code
+RUN chmod +x /code/docker-entrypoint.sh \
+    && apt update \
+    && apt upgrade -y \
+    && apt install -y --no-install-recommends gcc default-mysql-client vim \
+    && apt clean \
+    && python3 -m pip install -r requirements.txt \
+    && python3 -m pip cache purge
+CMD /usr/local/bin/python3 -m gunicorn -b 0.0.0.0:5000 manage:app
+EXPOSE 5000
+```
+
+---
+
+# Starting to Use Docker - `Dockerfile`
+
+- `FROM` - Sets the base image for subsequent instructions
+- `WORKDIR` - Sets the working directory
+- `ENV` - Sets environment variables
+- `COPY` - Copies local files to container
+- `RUN` - Runs specified commands
+- `CMD` - Provides defaults for an executing container, and there can be only one `CMD` instruction
+- `EXPOSE` - Informs Docker that the container listens on the specified network ports at runtime.
+
+<!--
+
+`COPY` means the data in container and in host are independent
+
+-->
+
+---
+
+# Starting to Use Docker - `Dockerfile`
+
+After finishing `Dockerfile`, we can build it as an image.
+
+- `$ sudo docker build .` - Builds `Dockerfile` in current directory as an image
+- `$ sudo docker build -t my_docker_image:test .` - Builds `Dockerfile` with name `my_docker_image` and tag `test`
+
+---
+
+# Starting to Use Docker - `docker-compose`
+
+Sometimes we need to connect multiple containers and make them work together.
+
+`docker-compose` is a tool for defining and running multi-container Docker applications.
+
+The services are defined in a YAML file named `docker-compose.yaml`.
+
+![](/docker-compose-logo.png)
+
+---
+layout: two-cols
+---
+
+# Starting to Use Docker - `docker-compose`
+
+::left::
+
+```yaml
+version: '2'
+
+services:
+  web:
+    build: ./src
+    container_name: web
+    depends_on:
+      - db
+    restart: on-failure
+    environment:
+      - ENV=production
+    volumes:
+      - ./data/log:/code/log
+    networks:
+      - net
+```
+
+::right::
+
+```yaml
+# services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    depends_on:
+	  - web
+    restart: on-failure
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    network:
+      - net
+
+networks:
+  net:
+```
+
+<!--
+
+There are two services - web and nginx, and they are connected to the same network `net`.
+
+-->
+
+---
+
+# Starting to Use Docker - `docker-compose`
+
+- `build` - Manifests the image should be built with `Dockerfile` under specified directory
+- `container_name` - Sets the container name
+- `depends_on` - Starts the container after the containers on the list start
+- `restart` - Restarts on specified situations. The situations can be: `no`, `on-failure`, `always` and `unless-stopped`
+- `environment` - Sets environment variables
+- `ports` - Sets the port mapping
+- `volumes` - Mount directories on host to container
+- `networks` - Connects to specified networks
+
+<!--
+
+Talk more about `volumes`.
+
+-->
+
+---
+
+# Starting to Use Docker - `docker-compose`
+
+- After creating `docker-compose.yaml`, we can launch the containers. We can also add `-d` options to make the containers run in the background.
+
+  `$ sudo docker-compose up -d`
+
+  For the example above, we can also add `--build` or `--no-build` to force rebuilding or no rebuilding.
+
+- Check whether they are working correctly.
+
+  `$ sudo docker-compose ps`
+
+- Stops containers and removes containers, networks, volumes, and images created by up.
+
+  `$ sudo docker-compose down`
+
+  For the example above, we can also add `--rmi` to remove images after shutdown.
+
