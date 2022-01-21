@@ -11,10 +11,6 @@ fonts:
 ### siriuskoan
 
 ---
-layout: two-cols
----
-
----
 
 # Special Thanks
 - CSY
@@ -23,6 +19,8 @@ layout: two-cols
 - Williamlin
 - ...
 
+---
+layout: two-cols
 ---
 
 # $ whoami
